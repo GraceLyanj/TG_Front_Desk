@@ -1,0 +1,25 @@
+{
+  "name": "TG Helper",
+  "short_name": "TG Helper",
+  "description": "Texas Global front desk reference links (ISSS).",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#BF5700",
+  "theme_color": "#BF5700",
+  "icons": [
+    {
+      "src": "icons/tg-helper-icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/tg-helper-icon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
