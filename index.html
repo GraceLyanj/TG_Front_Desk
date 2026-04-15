@@ -67,11 +67,11 @@
         text-decoration: none; box-shadow: 0 2px 8px rgba(0,0,0,.15);
       }
       .skip-link:focus { top: 12px; }
-      a:focus-visible, button:focus-visible, input:focus-visible, [role="dialog"]:focus-visible {
+      a:focus-visible, button:focus-visible, input:focus-visible, [role="button"]:focus-visible, [role="dialog"]:focus-visible {
         outline: 3px solid #fff !important;
         outline-offset: 3px;
       }
-      button:focus-visible, input:focus-visible, a:focus-visible {
+      button:focus-visible, input:focus-visible, a:focus-visible, [role="button"]:focus-visible {
         box-shadow: 0 0 0 3px rgba(191,87,0,.25);
       }
       @media (prefers-reduced-motion: reduce) {
@@ -203,8 +203,40 @@ const TOPICS = [
         source: "ISSS · Texas Global",
         domain: "global.utexas.edu",
         qrUrl: "https://isss.io.utexas.edu/istart/controllers/client/ClientEngine.cfm?menuFlag=true&serviceid=EFormGTPAccessCode0ServiceProvider",
+        detailColumns: [
+          {
+            title: "Key information",
+            items: [
+              "Eligible users include current F-1/J-1, OPT/STEM OPT, and former F-1/J-1 users who still have myIO access.",
+              "Before starting, gather: U.S. tax ID number, passport, U.S. arrival/departure history (I-94), and prior nonresident returns.",
+              "If stuck, Sprintax support is available via hello@sprintax.com and live chat.",
+            ],
+          },
+          {
+            title: "Quick note",
+            items: [
+              "This QR code goes directly to the Sprintax access-code page (after myIO login).",
+            ],
+          },
+        ],
       },
-      { label: "Tax filing login (no campus SSO)", url: "https://www.sprintax.com/dashboard/login/", source: "Sprintax", domain: "sprintax.com" },
+      {
+        label: "Tax filing login",
+        url: "https://www.sprintax.com/dashboard/login/",
+        source: "Sprintax",
+        domain: "sprintax.com",
+        detailColumns: [
+          {
+            title: "Sprintax Steps",
+            items: [
+              "Go to Returns.",
+              "Do NOT use the campus login option.",
+              "Log in with your own email address.",
+              "Fee waiver applies at checkout with a code accessed in myIO.",
+            ],
+          },
+        ],
+      },
       { label: "Nonresident taxes (AFM)", url: "https://afm.utexas.edu/tax-services/nonresident-taxes", source: "Accounting & Financial Management · UT Austin", domain: "afm.utexas.edu" },
       { label: "Tax guide for international students & scholars", url: "https://www.irs.gov/individuals/international-taxpayers/foreign-students-and-scholars", source: "IRS · Internal Revenue Service", domain: "irs.gov" },
     ],
@@ -243,11 +275,11 @@ const TOPICS = [
   },
   {
     key: "myio",
-    tileLabel: "myIO request services",
+    tileLabel: "myIO",
     tileSub: "Portal entrance",
     iconColor: "teal",
     keywords: "myio request services portal students scholars departments immigration benefits case status documents",
-    title: "myIO request services",
+    title: "myIO",
     desc: "myIO is the main ISSS portal for students, scholars, and departments to submit requests, manage immigration records, and track case progress.",
     notice: "For myIO support, direct students to the portal entrance first and then to the correct student request page.",
     links: [
@@ -406,21 +438,40 @@ function Tag({ text, color = "orange" }) {
 // Built directly into the component, no post-render DOM injection.
 
 function QrToggle({ url, detail, detailColumns, isOpen, onToggle }) {
+  const onSectionClick = e => {
+    e.preventDefault();
+    e.stopPropagation();
+    onToggle();
+  };
+  const onSectionKeyDown = e => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      e.stopPropagation();
+      onToggle();
+    }
+  };
   return (
-    <div style={{ marginTop: 10, paddingTop: 10, borderTop: "1px solid rgba(51,63,72,0.1)" }}>
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-end" }}>
-        <button
-          onClick={e => { e.preventDefault(); e.stopPropagation(); onToggle(); }}
-          style={{ flexShrink: 0, padding: "6px 12px", border: "1px solid rgba(51,63,72,0.2)",
-            borderRadius: 8, background: "rgba(51,63,72,0.04)", fontSize: 12, fontWeight: 600,
-            cursor: "pointer", fontFamily: "var(--font-sans)", color: "var(--color-slate)",
-            display: "flex", alignItems: "center", gap: 5 }}>
-          <Icon name="qr" size={13} />
-          {isOpen ? "Hide quick view" : "Quick view (QR + details)"}
-        </button>
-      </div>
+    <div
+      role="button"
+      tabIndex={0}
+      aria-expanded={isOpen}
+      aria-label={isOpen ? "Hide quick view (QR and details)" : "Show quick view (QR and details)"}
+      title={isOpen ? "Tap anywhere in this section to hide quick view" : "Tap anywhere in this section for quick view"}
+      onClick={onSectionClick}
+      onKeyDown={onSectionKeyDown}
+      style={{
+        marginTop: 10, marginLeft: -16, marginRight: -16, marginBottom: -14,
+        padding: "10px 16px 14px", borderTop: "1px solid rgba(51,63,72,0.1)",
+        cursor: "pointer", color: "var(--color-slate)",
+        WebkitTapHighlightColor: "transparent",
+      }}>
+      {!isOpen && (
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-end", minHeight: 28 }}>
+          <Icon name="qr" size={22} style={{ pointerEvents: "none" }} aria-hidden />
+        </div>
+      )}
       {isOpen && (
-        <div style={{ marginTop: 10, display: "grid", gridTemplateColumns: "1fr 96px", gap: 10, alignItems: "start" }}>
+        <div style={{ marginTop: 0, display: "grid", gridTemplateColumns: "1fr 96px", gap: 10, alignItems: "start" }}>
           <div style={{ fontSize: 12, color: "#666", lineHeight: 1.5 }}>
             {detailColumns ? (
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
@@ -439,9 +490,9 @@ function QrToggle({ url, detail, detailColumns, isOpen, onToggle }) {
           </div>
           <img
             src={`https://quickchart.io/qr?size=150&text=${encodeURIComponent(url)}`}
-            alt="QR code" width={96} height={96}
+            alt="" width={96} height={96}
             style={{ display: "block", border: "1px solid rgba(51,63,72,0.1)",
-              borderRadius: 8, background: "#fff", padding: 4 }}
+              borderRadius: 8, background: "#fff", padding: 4, pointerEvents: "none" }}
           />
         </div>
       )}
@@ -595,7 +646,7 @@ const SECTION_LABEL = {
 
 function BottomSheet({ topic, onClose }) {
   const sheetRef = useRef(null);
-  const dragRef = useRef({ active: false, startY: 0 });
+  const dragRef = useRef({ active: false, startY: 0, currentDy: 0 });
   const [dragOffset, setDragOffset] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
   const [openQuickViewKey, setOpenQuickViewKey] = useState(null);
@@ -627,32 +678,36 @@ function BottomSheet({ topic, onClose }) {
       if (!dragRef.current.active) return;
       e.preventDefault();
       const delta = Math.max(0, e.clientY - dragRef.current.startY);
+      dragRef.current.currentDy = delta;
       setDragOffset(delta);
     };
-    const onPointerEnd = () => {
+    const endDrag = () => {
       if (!dragRef.current.active) return;
       dragRef.current.active = false;
       setIsDragging(false);
-      if (dragOffset > 110) {
+      const dy = dragRef.current.currentDy;
+      if (dy > 110) {
         onClose();
       } else {
+        dragRef.current.currentDy = 0;
         setDragOffset(0);
       }
     };
     window.addEventListener("pointermove", onPointerMove, { passive: false });
-    window.addEventListener("pointerup", onPointerEnd);
-    window.addEventListener("pointercancel", onPointerEnd);
+    window.addEventListener("pointerup", endDrag);
+    window.addEventListener("pointercancel", endDrag);
     return () => {
       window.removeEventListener("pointermove", onPointerMove);
-      window.removeEventListener("pointerup", onPointerEnd);
-      window.removeEventListener("pointercancel", onPointerEnd);
+      window.removeEventListener("pointerup", endDrag);
+      window.removeEventListener("pointercancel", endDrag);
     };
-  }, [dragOffset, onClose]);
+  }, [onClose]);
 
   const startDrag = e => {
     if (!topic) return;
     dragRef.current.active = true;
     dragRef.current.startY = e.clientY;
+    dragRef.current.currentDy = 0;
     setIsDragging(true);
     setDragOffset(0);
   };
