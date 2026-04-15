@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="apple-mobile-web-app-title" content="TG Helper" />
+    <meta name="apple-mobile-web-app-title" content="TG Frontdesk" />
     <meta name="mobile-web-app-capable" content="yes" />
-    <meta name="application-name" content="TG Helper" />
+    <meta name="application-name" content="TG Frontdesk" />
     <meta name="format-detection" content="telephone=no" />
     <meta name="theme-color" content="#BF5700" />
     <link rel="manifest" href="manifest.webmanifest" />
@@ -16,7 +16,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    <title>TG Helper</title>
+    <title>TG Frontdesk</title>
     <style>
       *, *:before, *:after {
         box-sizing: border-box;
@@ -29,9 +29,19 @@
         margin: 0;
       }
       :root {
-        --color-burnt: #BF5700;
-        --color-burnt-light: #FEF0E6;
-        --color-slate: #333F48;
+        --ut-7527: #D6D2C4;
+        --ut-432: #333F48;
+        --ut-159: #BF5700;
+        --ut-2011: #F8971F;
+        --ut-116: #FFD600;
+        --ut-2300: #A6CD57;
+        --ut-2277: #579D42;
+        --ut-320: #00A9B7;
+        --ut-7469: #005F86;
+        --ut-7543: #9CADB7;
+        --color-burnt: var(--ut-159);
+        --color-burnt-light: rgba(191, 87, 0, 0.12);
+        --color-slate: var(--ut-432);
         --color-surface: #FFFFFF;
         --color-card: #FFFFFF;
         --radius-tile: 10px;
@@ -116,7 +126,8 @@ const TOPICS = [
     title: "Book an appointment",
     desc: "For questions that need a one-on-one answer, students can book directly online. April appointments fill quickly — encourage students to book as early as possible.",
     links: [
-      { label: "International student advisor", url: "https://outlook.office365.com/book/InternationalStudentandScholarServices@utexas.onmicrosoft.com/", source: "ISSS · Texas Global", domain: "outlook.office365.com" },
+      { label: "International student advisor (In-person)", url: "https://bookings.cloud.microsoft/book/InternationalStudentandScholarServices@utexas.onmicrosoft.com/?ismsaljsauthenabled=true", source: "ISSS · Texas Global", domain: "bookings.cloud.microsoft" },
+      { label: "International student advisor (Virtual)", url: "https://bookings.cloud.microsoft/book/ISSSInternationalStudentServicesVirtualAdvising@utexas.onmicrosoft.com/?ismsaljsauthenabled=true", source: "ISSS · Texas Global", domain: "bookings.cloud.microsoft" },
       { label: "Education abroad peer mentors", url: "https://outlook.office365.com/book/EducationAbroadPeerMentors@utexas.onmicrosoft.com/", source: "Education Abroad · Texas Global", domain: "outlook.office365.com" },
     ],
     tags: [{ text: "Advisor", color: "blue" }, { text: "Peer mentor", color: "teal" }, { text: "April" }, { text: "Study abroad" }],
@@ -184,6 +195,7 @@ const TOPICS = [
     title: "Financial resources",
     desc: "Texas Global offers need and merit-based scholarships, funding for study and internship abroad, international wire transfers, and tuition and cash loan information through ISSS.",
     links: [
+      { label: "myIO Request Services (portal entrance)", url: "https://global.utexas.edu/isss/advising-services/myio", source: "ISSS · Texas Global", domain: "global.utexas.edu" },
       { label: "Education abroad scholarships & funding", url: "https://global.utexas.edu/abroad/funding/scholarships", source: "Education Abroad · Texas Global", domain: "global.utexas.edu" },
       { label: "ISSS scholarships", url: "https://global.utexas.edu/isss/advising-services/scholarships", source: "ISSS · Texas Global", domain: "global.utexas.edu" },
       { label: "myIO financial verification — new student check-in", url: "https://global.utexas.edu/isss/advising-services/myio/students/new-international-student-checkin-myio", source: "ISSS · Texas Global", domain: "global.utexas.edu" },
@@ -228,6 +240,7 @@ const TOPICS = [
     title: "New student check-in",
     desc: "New international students must complete the myIO check-in process before the semester begins. This includes financial verification, uploading documents, and confirming enrollment status.",
     links: [
+      { label: "myIO Request Services (portal entrance)", url: "https://global.utexas.edu/isss/advising-services/myio", source: "ISSS · Texas Global", domain: "global.utexas.edu" },
       { label: "New student check-in guide", url: "https://global.utexas.edu/isss/advising-services/myio/students/new-international-student-checkin-myio", source: "ISSS · Texas Global", domain: "global.utexas.edu" },
     ],
     tags: [{ text: "myIO" }, { text: "New student" }, { text: "Financial verification" }, { text: "Check-in" }],
@@ -273,7 +286,8 @@ const TOPICS = [
     desc: "The front desk can provide official resource links and point students in the right direction. For questions we cannot answer with a specific resource — or anything that needs a closer look — connect the student with an ISSS advisor.",
     notice: "If a student has an urgent or sensitive situation, connect them with an advisor directly. Always make sure they leave with a clear next step.",
     links: [
-      { label: "Book an advisor appointment", url: "https://outlook.office365.com/book/InternationalStudentandScholarServices@utexas.onmicrosoft.com/", source: "ISSS · Texas Global", domain: "outlook.office365.com" },
+      { label: "Book an advisor appointment (In-person)", url: "https://bookings.cloud.microsoft/book/InternationalStudentandScholarServices@utexas.onmicrosoft.com/?ismsaljsauthenabled=true", source: "ISSS · Texas Global", domain: "bookings.cloud.microsoft" },
+      { label: "Book an advisor appointment (Virtual)", url: "https://bookings.cloud.microsoft/book/ISSSInternationalStudentServicesVirtualAdvising@utexas.onmicrosoft.com/?ismsaljsauthenabled=true", source: "ISSS · Texas Global", domain: "bookings.cloud.microsoft" },
       { label: "Hotline email — hotline@austin.utexas.edu", url: "https://global.utexas.edu/isss/about/contact", source: "ISSS · Texas Global", domain: "global.utexas.edu" },
     ],
     tags: [{ text: "Book advisor" }, { text: "Connect with ISSS" }, { text: "Front desk scope" }],
@@ -293,11 +307,11 @@ const ICONS = {
   "user-check":     <><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><polyline points="16 11 18 13 22 9"/></>,
   files:            <><path d="M20 7h-3a2 2 0 0 1-2-2V2"/><path d="M9 18a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h7l4 4v10a2 2 0 0 1-2 2Z"/><path d="M3 7.6v12.8A1.6 1.6 0 0 0 4.6 22h9.8"/></>,
   headset:          <><path d="M3 11h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-5Zm0 0a9 9 0 1 1 18 0m0 0v5a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3Z"/><path d="M21 16v2a4 4 0 0 1-4 4h-5"/></>,
-  "circle-help":    <><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></>,
+  "circle-help":    <><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></>,
   search:           <><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></>,
   "arrow-up-right": <><path d="M7 7h10v10"/><path d="M7 17 17 7"/></>,
-  info:             <><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><line x1="12" y1="8" x2="12.01" y2="8"/></>,
-  "alert-circle":   <><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></>,
+  info:             <><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></>,
+  "alert-circle":   <><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></>,
   qr:               <><rect width="5" height="5" x="3" y="3" rx="1"/><rect width="5" height="5" x="16" y="3" rx="1"/><rect width="5" height="5" x="3" y="16" rx="1"/><path d="M21 16h-3a2 2 0 0 0-2 2v3"/><path d="M21 21v.01"/><path d="M12 7v3a2 2 0 0 1-2 2H7"/><path d="M3 12h.01"/><path d="M12 3h.01"/><path d="M12 16v.01"/><path d="M16 12h1"/><path d="M21 12v.01"/><path d="M12 21v-1"/></>,
 };
 
@@ -309,23 +323,23 @@ const TOPIC_ICON = {
 };
 
 const ICON_COLORS = {
-  orange: { bg: "#FEF0E6", fg: "#BF5700" },
-  blue:   { bg: "#E6F1FB", fg: "#185FA5" },
-  green:  { bg: "#EAF3DE", fg: "#3B6D11" },
-  teal:   { bg: "#E1F5EE", fg: "#0F6E56" },
-  purple: { bg: "#EEEDFE", fg: "#534AB7" },
-  amber:  { bg: "#FAEEDA", fg: "#854F0B" },
-  red:    { bg: "#FCEBEB", fg: "#A32D2D" },
-  slate:  { bg: "#F1EFE8", fg: "#5F5E5A" },
-  pink:   { bg: "#FBEAF0", fg: "#993556" },
+  orange: { bg: "rgba(191, 87, 0, 0.14)", fg: "#BF5700" },
+  blue:   { bg: "rgba(0, 95, 134, 0.14)", fg: "#005F86" },
+  green:  { bg: "rgba(87, 157, 66, 0.15)", fg: "#579D42" },
+  teal:   { bg: "rgba(0, 169, 183, 0.16)", fg: "#005F86" },
+  purple: { bg: "rgba(156, 173, 183, 0.18)", fg: "#333F48" },
+  amber:  { bg: "rgba(248, 151, 31, 0.18)", fg: "#BF5700" },
+  red:    { bg: "rgba(191, 87, 0, 0.14)", fg: "#BF5700" },
+  slate:  { bg: "rgba(214, 210, 196, 0.5)", fg: "#333F48" },
+  pink:   { bg: "rgba(156, 173, 183, 0.18)", fg: "#005F86" },
 };
 
 const TAG_COLORS = {
-  orange: { bg: "#FEF0E6", fg: "#7A3700" },
-  blue:   { bg: "#E6F1FB", fg: "#185FA5" },
-  green:  { bg: "#EAF3DE", fg: "#3B6D11" },
-  purple: { bg: "#EEEDFE", fg: "#534AB7" },
-  teal:   { bg: "#E1F5EE", fg: "#0F6E56" },
+  orange: { bg: "rgba(191, 87, 0, 0.14)", fg: "#7A3700" },
+  blue:   { bg: "rgba(0, 95, 134, 0.14)", fg: "#005F86" },
+  green:  { bg: "rgba(87, 157, 66, 0.16)", fg: "#2F5E1E" },
+  purple: { bg: "rgba(156, 173, 183, 0.2)", fg: "#333F48" },
+  teal:   { bg: "rgba(0, 169, 183, 0.18)", fg: "#005F86" },
 };
 
 // ─── PRIMITIVE COMPONENTS ─────────────────────────────────────────────────────
@@ -333,7 +347,8 @@ const TAG_COLORS = {
 function Icon({ name, size = 21, style = {} }) {
   return (
     <svg width={size} height={size} fill="none" stroke="currentColor"
-      strokeWidth={1.8} viewBox="0 0 24 24" style={style}>
+      strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round"
+      viewBox="0 0 24 24" style={style}>
       {ICONS[name]}
     </svg>
   );

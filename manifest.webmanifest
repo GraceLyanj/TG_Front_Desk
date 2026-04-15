@@ -1,6 +1,6 @@
 {
-  "name": "TG Helper",
-  "short_name": "TG Helper",
+  "name": "TG Frontdesk",
+  "short_name": "TG Frontdesk",
   "description": "Texas Global front desk reference links (ISSS).",
   "start_url": "./",
   "scope": "./",
