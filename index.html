@@ -95,7 +95,7 @@
 const { useState, useEffect, useRef } = React;
 
 // ─── DATA ─────────────────────────────────────────────────────────────────────
-// All links are correct here — no post-render patching needed.
+// All links are correct here, no post-render patching needed.
 // qrUrl on a link overrides which URL gets encoded in the QR (e.g. Sprintax code form).
 
 const TOPICS = [
@@ -106,13 +106,14 @@ const TOPICS = [
     iconColor: "orange",
     keywords: "cpt opt stem work authorization employment f1 i-983 practical training 10 business days last name ssn social security",
     title: "Work authorization",
-    desc: "F-1 students can work off-campus through CPT or OPT. Processing takes 10 business days — remind students to plan ahead and allow time for departmental approval (Step 4). Applications are sorted by last name for processing.",
+    desc: "F-1 students can work off-campus through CPT or OPT. Processing takes 10 business days, remind students to plan ahead and allow time for departmental approval (Step 4). Applications are sorted by last name for processing.",
     notice: "We cannot confirm application status. Students receive a confirmation email when their application is received and again when reviewed. For specific job permissibility under OPT, point to official DHS resources.",
     links: [
-      { label: "CPT — Curricular Practical Training", url: "https://global.utexas.edu/isss/immigration/f-1/employment/cpt", source: "ISSS · Texas Global", domain: "global.utexas.edu" },
-      { label: "OPT — Post-completion work authorization", url: "https://global.utexas.edu/isss/immigration/f-1/employment/post-completion-opt", source: "ISSS · Texas Global", domain: "global.utexas.edu" },
+      { label: "CPT: Curricular Practical Training", url: "https://global.utexas.edu/isss/immigration/f-1/employment/cpt", source: "ISSS · Texas Global", domain: "global.utexas.edu" },
+      { label: "Zero-Credit Internship Course (EXP 000/080)", url: "https://careersuccess.utexas.edu/students/get-experience/zero-credit-internship-course/", source: "UT Career Success", domain: "careersuccess.utexas.edu" },
+      { label: "OPT: Post-completion work authorization", url: "https://global.utexas.edu/isss/immigration/f-1/employment/post-completion-opt", source: "ISSS · Texas Global", domain: "global.utexas.edu" },
       { label: "STEM OPT extension (Form I-983)", url: "https://global.utexas.edu/isss/immigration/f-1/employment/stem-opt", source: "ISSS · Texas Global", domain: "global.utexas.edu" },
-      { label: "F-1 optional practical training — SEVIS Help Hub", url: "https://studyinthestates.dhs.gov/sevis-help-hub/student-records/fm-student-employment/f-1-optional-practical-training-opt", source: "DHS · Study in the States", domain: "studyinthestates.dhs.gov" },
+      { label: "F-1 OPT (SEVIS Help Hub)", url: "https://studyinthestates.dhs.gov/sevis-help-hub/student-records/fm-student-employment/f-1-optional-practical-training-opt", source: "DHS · Study in the States", domain: "studyinthestates.dhs.gov" },
       { label: "Apply for SSN", url: "https://global.utexas.edu/isss/life-at-ut/ssn", source: "ISSS · Texas Global", domain: "global.utexas.edu" },
     ],
     tags: [{ text: "CPT" }, { text: "OPT" }, { text: "STEM OPT" }, { text: "Form I-983" }, { text: "10 business days" }, { text: "Last name A–Z" }],
@@ -121,10 +122,10 @@ const TOPICS = [
     key: "appt",
     tileLabel: "Book appointment",
     tileSub: "Advisor or peer mentor",
-    iconColor: "blue",
+    iconColor: "green",
     keywords: "appointment advisor book schedule peer mentor advising april",
     title: "Book an appointment",
-    desc: "For questions that need a one-on-one answer, students can book directly online. April appointments fill quickly — encourage students to book as early as possible.",
+    desc: "For questions that need a one-on-one answer, students can book directly online. April appointments fill quickly, encourage students to book as early as possible.",
     links: [
       { label: "International student advisor (In-person)", url: "https://bookings.cloud.microsoft/book/InternationalStudentandScholarServices@utexas.onmicrosoft.com/?ismsaljsauthenabled=true", source: "ISSS · Texas Global", domain: "bookings.cloud.microsoft" },
       { label: "International student advisor (Virtual)", url: "https://bookings.cloud.microsoft/book/ISSSInternationalStudentServicesVirtualAdvising@utexas.onmicrosoft.com/?ismsaljsauthenabled=true", source: "ISSS · Texas Global", domain: "bookings.cloud.microsoft" },
@@ -136,14 +137,14 @@ const TOPICS = [
     key: "insurance",
     tileLabel: "Health insurance",
     tileSub: "Plan, waivers & card",
-    iconColor: "green",
+    iconColor: "blue",
     keywords: "insurance health plan bcbs waiver card benefits summer graduate ahs ahp",
     title: "Health insurance",
     desc: "International students are automatically enrolled in the UT student health plan. Waivers are available for students with equivalent coverage. Graduates in May may request a summer waiver. For a lost card, direct them to the plan website to view their digital ID.",
     notice: "We cannot answer specific coverage questions. For benefits explanations and card details, point students to the official plan pages below.",
     links: [
-      { label: "Student health plan — overview & waivers", url: "https://global.utexas.edu/isss/advising-services/insurance/student-plan", source: "ISSS · Texas Global", domain: "global.utexas.edu" },
-      { label: "Member portal — find providers, view ID card", url: "https://www.bcbstx.com/", source: "BCBS · Blue Cross Blue Shield Texas", domain: "bcbstx.com" },
+      { label: "Student health plan (overview & waivers)", url: "https://global.utexas.edu/isss/advising-services/insurance/student-plan", source: "ISSS · Texas Global", domain: "global.utexas.edu" },
+      { label: "Member portal (find providers, view ID card)", url: "https://www.bcbstx.com/", source: "BCBS · Blue Cross Blue Shield Texas", domain: "bcbstx.com" },
       { label: "UT Austin enrollment, waivers & billing", url: "https://utexas.myahpcare.com/", source: "AHP · Academic HealthPlans", domain: "utexas.myahpcare.com" },
     ],
     tags: [{ text: "Card" }, { text: "Waiver" }, { text: "BCBS", color: "blue" }, { text: "AHP", color: "blue" }, { text: "Summer waiver" }, { text: "Graduate" }],
@@ -152,14 +153,14 @@ const TOPICS = [
     key: "travel",
     tileLabel: "Travel & signatures",
     tileSub: "Before-travel, I-515A, I-94",
-    iconColor: "teal",
+    iconColor: "green",
     keywords: "travel signature i20 i-515a i-94 dhs cbp border re-entry before travel arrival record",
     title: "Travel & signatures",
     desc: "Students must have a valid travel signature on their I-20 before leaving the US. The Form I-515A is a DHS form for students who arrived at a port of entry without a proper visa or entry document. The I-94 is the official CBP arrival record.",
     notice: "Remind students: request travel signatures BEFORE booking international travel. Processing takes time.",
     links: [
       { label: "Before-travel signature info", url: "https://global.utexas.edu/isss/immigration/before-travel", source: "ISSS · Texas Global", domain: "global.utexas.edu" },
-      { label: "I-94 — official arrival record", url: "https://i94.cbp.dhs.gov/home", source: "CBP · DHS", domain: "i94.cbp.dhs.gov" },
+      { label: "I-94 (official arrival record)", url: "https://i94.cbp.dhs.gov/home", source: "CBP · DHS", domain: "i94.cbp.dhs.gov" },
       { label: "Form I-515A overview", url: "https://studyinthestates.dhs.gov/students/travel/form-i-515a-overview", source: "DHS · Study in the States", domain: "studyinthestates.dhs.gov" },
     ],
     tags: [{ text: "I-20" }, { text: "Travel signature" }, { text: "I-94", color: "blue" }, { text: "I-515A", color: "blue" }, { text: "DHS", color: "blue" }, { text: "Re-entry" }],
@@ -171,7 +172,7 @@ const TOPICS = [
     iconColor: "amber",
     keywords: "taxes sprintax tax code irs withholding non-resident treaty email",
     title: "Taxes",
-    desc: "Sprintax is the recommended tax prep software for international students. UT does not have a campus login — students must create their own account. The UT discount code is found on the ISSS taxes page.",
+    desc: "Sprintax is the recommended tax prep software for international students. UT does not have a campus login, students must create their own account. The UT discount code is found on the ISSS taxes page.",
     notice: "We are not tax advisors. For specific treaty or withholding questions, point students to the IRS or Sprintax directly.",
     links: [
       {
@@ -182,6 +183,7 @@ const TOPICS = [
         qrUrl: "https://isss.io.utexas.edu/istart/controllers/client/ClientEngine.cfm?menuFlag=true&serviceid=EFormGTPAccessCode0ServiceProvider",
       },
       { label: "Tax filing login (no campus SSO)", url: "https://www.sprintax.com/dashboard/login/", source: "Sprintax", domain: "sprintax.com" },
+      { label: "Nonresident taxes (AFM)", url: "https://afm.utexas.edu/tax-services/nonresident-taxes", source: "Accounting & Financial Management · UT Austin", domain: "afm.utexas.edu" },
       { label: "Tax guide for international students & scholars", url: "https://www.irs.gov/individuals/international-taxpayers/foreign-students-and-scholars", source: "IRS · Internal Revenue Service", domain: "irs.gov" },
     ],
     tags: [{ text: "Sprintax" }, { text: "Tax code" }, { text: "No campus login" }, { text: "IRS", color: "blue" }, { text: "Non-resident" }],
@@ -189,18 +191,17 @@ const TOPICS = [
   {
     key: "financial",
     tileLabel: "Financial resources",
-    tileSub: "Scholarships, myIO",
+    tileSub: "Scholarships, tuition",
     iconColor: "purple",
-    keywords: "scholarship funding financial myio verification aid money wire transfer check-in isss study abroad",
+    keywords: "scholarship funding financial aid money wire transfer tuition residency questionnaire ut direct isss study abroad",
     title: "Financial resources",
     desc: "Texas Global offers need and merit-based scholarships, funding for study and internship abroad, international wire transfers, and tuition and cash loan information through ISSS.",
     links: [
-      { label: "myIO Request Services (portal entrance)", url: "https://global.utexas.edu/isss/advising-services/myio", source: "ISSS · Texas Global", domain: "global.utexas.edu" },
       { label: "Education abroad scholarships & funding", url: "https://global.utexas.edu/abroad/funding/scholarships", source: "Education Abroad · Texas Global", domain: "global.utexas.edu" },
       { label: "ISSS scholarships", url: "https://global.utexas.edu/isss/advising-services/scholarships", source: "ISSS · Texas Global", domain: "global.utexas.edu" },
-      { label: "myIO financial verification — new student check-in", url: "https://global.utexas.edu/isss/advising-services/myio/students/new-international-student-checkin-myio", source: "ISSS · Texas Global", domain: "global.utexas.edu" },
+      { label: "Texas residency questionnaire", url: "https://utdirect.utexas.edu/apps/student/residency/", source: "UT Direct · UT Austin", domain: "utdirect.utexas.edu" },
     ],
-    tags: [{ text: "Scholarship", color: "purple" }, { text: "Study abroad funding", color: "purple" }, { text: "ISSS scholarships", color: "purple" }, { text: "myIO" }, { text: "Verification" }, { text: "Wire transfer" }],
+    tags: [{ text: "Scholarship", color: "purple" }, { text: "Study abroad funding", color: "purple" }, { text: "ISSS scholarships", color: "purple" }, { text: "Tuition" }, { text: "Residency questionnaire" }, { text: "Wire transfer" }],
   },
   {
     key: "studyabroad",
@@ -213,29 +214,45 @@ const TOPICS = [
     links: [
       { label: "Education Abroad programs & exchanges", url: "https://global.utexas.edu/abroad", source: "Education Abroad · Texas Global", domain: "global.utexas.edu" },
       { label: "Book a peer mentor appointment", url: "https://outlook.office365.com/book/EducationAbroadPeerMentors@utexas.onmicrosoft.com/", source: "Education Abroad · Texas Global", domain: "outlook.office365.com" },
+      { label: "Study abroad credit", url: "https://global.utexas.edu/abroad/apply/credit", source: "Education Abroad · Texas Global", domain: "global.utexas.edu" },
       { label: "Education abroad scholarships & funding", url: "https://global.utexas.edu/abroad/funding/scholarships", source: "Education Abroad · Texas Global", domain: "global.utexas.edu" },
     ],
     tags: [{ text: "Exchange" }, { text: "Peer mentor", color: "teal" }, { text: "Internship abroad" }, { text: "May Term" }, { text: "Scholarships" }],
   },
   {
-    key: "residency",
-    tileLabel: "Texas residency",
-    tileSub: "Tuition questionnaire",
-    iconColor: "slate",
-    keywords: "residency texas in-state tuition questionnaire ut direct reclassify",
-    title: "Texas residency",
-    desc: "Texas residency status affects tuition rates. Students can complete a residency questionnaire through UT Direct to determine or reclassify their status.",
-    notice: "We cannot make residency determinations. Direct the student to the questionnaire — they complete it themselves.",
+    key: "myio",
+    tileLabel: "myIO request services",
+    tileSub: "Portal entrance",
+    iconColor: "teal",
+    keywords: "myio request services portal students scholars departments immigration benefits case status documents",
+    title: "myIO request services",
+    desc: "myIO is the main ISSS portal for students, scholars, and departments to submit requests, manage immigration records, and track case progress.",
+    notice: "For myIO support, direct students to the portal entrance first and then to the correct student request page.",
     links: [
-      { label: "Texas residency questionnaire", url: "https://utdirect.utexas.edu/apps/student/residency/", source: "UT Direct · UT Austin", domain: "utdirect.utexas.edu" },
+      { label: "myIO Request Services (portal entrance)", url: "https://global.utexas.edu/isss/advising-services/myio", source: "ISSS · Texas Global", domain: "global.utexas.edu" },
+      { label: "myIO new student check-in guide", url: "https://global.utexas.edu/isss/advising-services/myio/students/new-international-student-checkin-myio", source: "ISSS · Texas Global", domain: "global.utexas.edu" },
     ],
-    tags: [{ text: "Residency" }, { text: "In-state tuition" }, { text: "Questionnaire" }, { text: "UT Direct", color: "blue" }],
+    tags: [{ text: "myIO" }, { text: "Portal" }, { text: "Student requests" }, { text: "Case status" }],
+  },
+  {
+    key: "academic",
+    tileLabel: "Academics",
+    tileSub: "Registration & holds",
+    iconColor: "amber",
+    keywords: "academic hub registration holds ris resolving holds classes advising emergency contact financial responsibility statement",
+    title: "Academics",
+    desc: "Academic registration support links, including the Texas One Stop hold-resolution guide students should use before registration.",
+    links: [
+      { label: "Resolving registration holds", url: "https://onestop.utexas.edu/registration-and-degree-planning/registering-for-classes/resolving-holds/", source: "Texas One Stop · UT Austin", domain: "onestop.utexas.edu" },
+      { label: "Study abroad credit", url: "https://global.utexas.edu/abroad/apply/credit", source: "Education Abroad · Texas Global", domain: "global.utexas.edu" },
+    ],
+    tags: [{ text: "Registration" }, { text: "RIS" }, { text: "Holds" }, { text: "Texas One Stop", color: "blue" }],
   },
   {
     key: "checkin",
     tileLabel: "New student check-in",
     tileSub: "myIO & first steps",
-    iconColor: "teal",
+    iconColor: "amber",
     keywords: "new student check-in myio financial verification arrival first semester",
     title: "New student check-in",
     desc: "New international students must complete the myIO check-in process before the semester begins. This includes financial verification, uploading documents, and confirming enrollment status.",
@@ -252,12 +269,12 @@ const TOPICS = [
     iconColor: "red",
     keywords: "immigration forms i-515a i-983 sevis dhs uscis status updates policy urgent",
     title: "Immigration forms & updates",
-    desc: "Key government forms and official immigration resources. ISSS monitors policy changes — direct students with urgent concerns to the immigration updates page or an advisor.",
+    desc: "Key government forms and official immigration resources. ISSS monitors policy changes, direct students with urgent concerns to the immigration updates page or an advisor.",
     notice: "For questions about specific immigration circumstances, always refer to an ISSS advisor. Do not interpret policy.",
     links: [
       { label: "Immigration policy updates", url: "https://global.utexas.edu/isss/immigration/immigration-updates", source: "ISSS · Texas Global", domain: "global.utexas.edu" },
       { label: "Form I-515A overview", url: "https://studyinthestates.dhs.gov/students/travel/form-i-515a-overview", source: "DHS · Study in the States", domain: "studyinthestates.dhs.gov" },
-      { label: "Form I-983 — STEM OPT training plan", url: "https://www.uscis.gov/i-983", source: "USCIS", domain: "uscis.gov" },
+      { label: "Form I-983 (STEM OPT training plan)", url: "https://www.uscis.gov/i-983", source: "USCIS", domain: "uscis.gov" },
       { label: "Student resource hub", url: "https://studyinthestates.dhs.gov/", source: "DHS · Study in the States", domain: "studyinthestates.dhs.gov" },
     ],
     tags: [{ text: "I-515A", color: "blue" }, { text: "I-983", color: "blue" }, { text: "DHS", color: "blue" }, { text: "SEVIS" }, { text: "Policy updates" }],
@@ -266,31 +283,15 @@ const TOPICS = [
     key: "contact",
     tileLabel: "Contact & hours",
     tileSub: "Location, email, phone",
-    iconColor: "blue",
+    iconColor: "teal",
     keywords: "contact hours phone email location address hotline nueces",
     title: "Contact & hours",
-    desc: "Texas Global is located at 2400 Nueces St., Suite B, Austin TX 78705. Front desk hours are Monday–Friday, 8 a.m.–5 p.m. The front desk assists with general questions and document pickups only — not immigration advising.",
+    desc: "Texas Global is located at 2400 Nueces St., Suite B, Austin TX 78705. Front desk hours are Monday–Friday, 8 a.m.–5 p.m. The front desk assists with general questions and document pickups only, not immigration advising.",
     links: [
       { label: "Contact page, location & office hours", url: "https://global.utexas.edu/isss/about/contact", source: "ISSS · Texas Global", domain: "global.utexas.edu" },
-      { label: "Hotline email — hotline@austin.utexas.edu", url: "https://global.utexas.edu/isss/about/contact", source: "ISSS · Texas Global", domain: "global.utexas.edu" },
+      { label: "Hotline email (hotline@austin.utexas.edu)", url: "https://global.utexas.edu/isss/about/contact", source: "ISSS · Texas Global", domain: "global.utexas.edu" },
     ],
     tags: [{ text: "(512) 471-2477" }, { text: "Mon–Fri 8–5" }, { text: "2400 Nueces St." }, { text: "Front desk" }],
-  },
-  {
-    key: "scope",
-    tileLabel: "More questions?",
-    tileSub: "Connect with an advisor",
-    iconColor: "orange",
-    keywords: "more questions advisor refer connect specific question help",
-    title: "More questions?",
-    desc: "The front desk can provide official resource links and point students in the right direction. For questions we cannot answer with a specific resource — or anything that needs a closer look — connect the student with an ISSS advisor.",
-    notice: "If a student has an urgent or sensitive situation, connect them with an advisor directly. Always make sure they leave with a clear next step.",
-    links: [
-      { label: "Book an advisor appointment (In-person)", url: "https://bookings.cloud.microsoft/book/InternationalStudentandScholarServices@utexas.onmicrosoft.com/?ismsaljsauthenabled=true", source: "ISSS · Texas Global", domain: "bookings.cloud.microsoft" },
-      { label: "Book an advisor appointment (Virtual)", url: "https://bookings.cloud.microsoft/book/ISSSInternationalStudentServicesVirtualAdvising@utexas.onmicrosoft.com/?ismsaljsauthenabled=true", source: "ISSS · Texas Global", domain: "bookings.cloud.microsoft" },
-      { label: "Hotline email — hotline@austin.utexas.edu", url: "https://global.utexas.edu/isss/about/contact", source: "ISSS · Texas Global", domain: "global.utexas.edu" },
-    ],
-    tags: [{ text: "Book advisor" }, { text: "Connect with ISSS" }, { text: "Front desk scope" }],
   },
 ];
 
@@ -318,8 +319,8 @@ const ICONS = {
 const TOPIC_ICON = {
   work: "briefcase", appt: "calendar-check-2", insurance: "heart-pulse",
   travel: "plane", taxes: "calculator", financial: "wallet",
-  studyabroad: "map", residency: "landmark", checkin: "user-check",
-  immigration: "files", contact: "headset", scope: "circle-help",
+  studyabroad: "map", myio: "landmark", academic: "landmark", checkin: "user-check",
+  immigration: "files", contact: "headset",
 };
 
 const ICON_COLORS = {
@@ -380,7 +381,7 @@ function Tag({ text, color = "orange" }) {
 }
 
 // ─── QR TOGGLE ────────────────────────────────────────────────────────────────
-// Built directly into the component — no post-render DOM injection.
+// Built directly into the component, no post-render DOM injection.
 
 function QrToggle({ url }) {
   const [open, setOpen] = useState(false);
@@ -526,7 +527,7 @@ function SearchBar({ value, onChange }) {
       </span>
       <input
         type="search" value={value} onChange={e => onChange(e.target.value)}
-        placeholder="Search — OPT, insurance, travel, taxes…"
+        placeholder="Search: OPT, insurance, travel, taxes…"
         aria-label="Search topics and resources"
         autoComplete="off" autoCorrect="off" spellCheck={false}
         style={{ width: "100%", padding: "12px 16px 12px 40px",
