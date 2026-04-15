@@ -129,6 +129,28 @@ const TOPICS = [
     links: [
       { label: "International student advisor (In-person)", url: "https://bookings.cloud.microsoft/book/InternationalStudentandScholarServices@utexas.onmicrosoft.com/?ismsaljsauthenabled=true", source: "ISSS · Texas Global", domain: "bookings.cloud.microsoft" },
       { label: "International student advisor (Virtual)", url: "https://bookings.cloud.microsoft/book/ISSSInternationalStudentServicesVirtualAdvising@utexas.onmicrosoft.com/?ismsaljsauthenabled=true", source: "ISSS · Texas Global", domain: "bookings.cloud.microsoft" },
+      {
+        label: "Drop-in services (signature hours & express advising)",
+        url: "https://global.utexas.edu/isss/advising-services/drop-in",
+        source: "ISSS · Texas Global",
+        domain: "global.utexas.edu",
+        detailColumns: [
+          {
+            title: "Signature hours",
+            items: [
+              "Students: Wed 1-4 p.m., Fri 9 a.m.-noon",
+              "Scholars: Mon and Wed 1-4 p.m.",
+            ],
+          },
+          {
+            title: "Express advising check-in",
+            items: [
+              "Mon and Wed: 1-3:30 p.m.",
+              "Fri: 9-11:30 a.m.",
+            ],
+          },
+        ],
+      },
       { label: "Education abroad peer mentors", url: "https://outlook.office365.com/book/EducationAbroadPeerMentors@utexas.onmicrosoft.com/", source: "Education Abroad · Texas Global", domain: "outlook.office365.com" },
     ],
     tags: [{ text: "Advisor", color: "blue" }, { text: "Peer mentor", color: "teal" }, { text: "April" }, { text: "Study abroad" }],
@@ -383,29 +405,45 @@ function Tag({ text, color = "orange" }) {
 // ─── QR TOGGLE ────────────────────────────────────────────────────────────────
 // Built directly into the component, no post-render DOM injection.
 
-function QrToggle({ url }) {
-  const [open, setOpen] = useState(false);
+function QrToggle({ url, detail, detailColumns, isOpen, onToggle }) {
   return (
-    <div style={{ marginTop: 10, paddingTop: 10, borderTop: "1px solid rgba(51,63,72,0.1)",
-      display: "flex", alignItems: "center", justifyContent: "flex-end", gap: 10 }}>
-      {open ? (
-        <img
-          src={`https://quickchart.io/qr?size=150&text=${encodeURIComponent(url)}`}
-          alt="QR code" title="Tap to close" width={96} height={96}
-          onClick={() => setOpen(false)}
-          style={{ display: "block", flexShrink: 0, border: "1px solid rgba(51,63,72,0.1)",
-            borderRadius: 8, background: "#fff", padding: 4, cursor: "pointer" }}
-        />
-      ) : (
+    <div style={{ marginTop: 10, paddingTop: 10, borderTop: "1px solid rgba(51,63,72,0.1)" }}>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "flex-end" }}>
         <button
-          onClick={e => { e.preventDefault(); e.stopPropagation(); setOpen(true); }}
+          onClick={e => { e.preventDefault(); e.stopPropagation(); onToggle(); }}
           style={{ flexShrink: 0, padding: "6px 12px", border: "1px solid rgba(51,63,72,0.2)",
             borderRadius: 8, background: "rgba(51,63,72,0.04)", fontSize: 12, fontWeight: 600,
             cursor: "pointer", fontFamily: "var(--font-sans)", color: "var(--color-slate)",
             display: "flex", alignItems: "center", gap: 5 }}>
           <Icon name="qr" size={13} />
-          QR code
+          {isOpen ? "Hide quick view" : "Quick view (QR + details)"}
         </button>
+      </div>
+      {isOpen && (
+        <div style={{ marginTop: 10, display: "grid", gridTemplateColumns: "1fr 96px", gap: 10, alignItems: "start" }}>
+          <div style={{ fontSize: 12, color: "#666", lineHeight: 1.5 }}>
+            {detailColumns ? (
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+                {detailColumns.map(col => (
+                  <div key={col.title}>
+                    <div style={{ fontWeight: 700, color: "var(--color-slate)", marginBottom: 4 }}>{col.title}</div>
+                    <ul style={{ margin: 0, paddingLeft: 18 }}>
+                      {col.items.map(item => <li key={item}>{item}</li>)}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              detail || "Scan the QR code to open this resource quickly on another device."
+            )}
+          </div>
+          <img
+            src={`https://quickchart.io/qr?size=150&text=${encodeURIComponent(url)}`}
+            alt="QR code" width={96} height={96}
+            style={{ display: "block", border: "1px solid rgba(51,63,72,0.1)",
+              borderRadius: 8, background: "#fff", padding: 4 }}
+          />
+        </div>
       )}
     </div>
   );
@@ -447,7 +485,13 @@ function LinkCard({ link }) {
           <Icon name="arrow-up-right" size={18} />
         </div>
       </div>
-      <QrToggle url={qrUrl} />
+      <QrToggle
+        url={qrUrl}
+        detail={link.detail}
+        detailColumns={link.detailColumns}
+        isOpen={link.quickViewOpen}
+        onToggle={link.onToggleQuickView}
+      />
     </a>
   );
 }
@@ -551,6 +595,10 @@ const SECTION_LABEL = {
 
 function BottomSheet({ topic, onClose }) {
   const sheetRef = useRef(null);
+  const dragRef = useRef({ active: false, startY: 0 });
+  const [dragOffset, setDragOffset] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+  const [openQuickViewKey, setOpenQuickViewKey] = useState(null);
 
   useEffect(() => {
     if (topic && sheetRef.current) {
@@ -565,6 +613,54 @@ function BottomSheet({ topic, onClose }) {
     return () => window.removeEventListener("keydown", onKey);
   }, [onClose]);
 
+  useEffect(() => {
+    if (!topic) {
+      dragRef.current.active = false;
+      setIsDragging(false);
+      setDragOffset(0);
+      setOpenQuickViewKey(null);
+    }
+  }, [topic]);
+
+  useEffect(() => {
+    const onPointerMove = e => {
+      if (!dragRef.current.active) return;
+      e.preventDefault();
+      const delta = Math.max(0, e.clientY - dragRef.current.startY);
+      setDragOffset(delta);
+    };
+    const onPointerEnd = () => {
+      if (!dragRef.current.active) return;
+      dragRef.current.active = false;
+      setIsDragging(false);
+      if (dragOffset > 110) {
+        onClose();
+      } else {
+        setDragOffset(0);
+      }
+    };
+    window.addEventListener("pointermove", onPointerMove, { passive: false });
+    window.addEventListener("pointerup", onPointerEnd);
+    window.addEventListener("pointercancel", onPointerEnd);
+    return () => {
+      window.removeEventListener("pointermove", onPointerMove);
+      window.removeEventListener("pointerup", onPointerEnd);
+      window.removeEventListener("pointercancel", onPointerEnd);
+    };
+  }, [dragOffset, onClose]);
+
+  const startDrag = e => {
+    if (!topic) return;
+    dragRef.current.active = true;
+    dragRef.current.startY = e.clientY;
+    setIsDragging(true);
+    setDragOffset(0);
+  };
+
+  const handleQuickViewToggle = linkKey => {
+    setOpenQuickViewKey(prev => (prev === linkKey ? null : linkKey));
+  };
+
   return (
     <div
       onClick={e => { if (e.target === e.currentTarget) onClose(); }}
@@ -572,66 +668,84 @@ function BottomSheet({ topic, onClose }) {
       style={{ position: "fixed", inset: 0, zIndex: 50,
         display: "flex", alignItems: "flex-end", justifyContent: "center",
         background: topic ? "rgba(20,28,34,0.55)" : "transparent",
-        opacity: topic ? 1 : 0, pointerEvents: topic ? "auto" : "none",
+        opacity: topic ? Math.max(0, 1 - dragOffset / 220) : 0, pointerEvents: topic ? "auto" : "none",
         backdropFilter: topic ? "blur(2px)" : "none",
         WebkitBackdropFilter: topic ? "blur(2px)" : "none",
         transition: "opacity 0.2s ease" }}>
       <div
-        ref={sheetRef} className="sheet-scroll" tabIndex={-1}
         style={{ background: "var(--color-card)", width: "100%",
           borderRadius: "var(--radius-sheet) var(--radius-sheet) 0 0",
-          maxHeight: "90vh", overflowY: "auto",
-          paddingBottom: "max(2.5rem, env(safe-area-inset-bottom))",
-          transform: topic ? "translateY(0)" : "translateY(100%)",
-          transition: "transform 0.3s cubic-bezier(0.32, 0.72, 0, 1)",
+          maxHeight: "90vh", overflow: "hidden", display: "flex", flexDirection: "column",
+          transform: topic ? `translateY(${dragOffset}px)` : "translateY(100%)",
+          transition: isDragging ? "none" : "transform 0.3s cubic-bezier(0.32, 0.72, 0, 1)",
           fontFamily: "var(--font-sans)" }}>
         {/* drag handle */}
-        <div style={{ display: "flex", justifyContent: "center", padding: "12px 0 16px" }}>
+        <div
+          onPointerDown={startDrag}
+          style={{ display: "flex", justifyContent: "center", padding: "12px 0 16px",
+            touchAction: "none", cursor: isDragging ? "grabbing" : "grab" }}>
           <div style={{ width: 36, height: 4, background: "rgba(51,63,72,0.12)", borderRadius: 2 }} />
         </div>
 
-        {topic && (
-          <>
-            {/* header */}
-            <div style={{ display: "flex", alignItems: "flex-start", gap: 14,
-              padding: "0 24px 18px", borderBottom: "2px solid var(--color-burnt)" }}>
-              <TopicIcon topicKey={topic.key} color={topic.iconColor} size="md" />
-              <div>
-                <h2 id="sheet-title" style={{ fontSize: 22, fontWeight: 700,
-                  color: "var(--color-slate)", lineHeight: 1.15,
-                  letterSpacing: "-0.02em", margin: 0 }}>{topic.title}</h2>
-                <p style={{ fontSize: 14, color: "#555", lineHeight: 1.65, margin: "8px 0 0" }}>
-                  {topic.desc}
-                </p>
-              </div>
-            </div>
-
-            {/* body */}
-            <div style={{ padding: "20px 24px 0" }}>
-              {topic.notice && (
-                <div style={{ display: "flex", alignItems: "flex-start", gap: 10,
-                  background: "var(--color-burnt-light)", borderLeft: "4px solid var(--color-burnt)",
-                  borderRadius: "0 6px 6px 0", padding: "12px 14px", marginBottom: 20,
-                  fontSize: 13, color: "#7A3700", lineHeight: 1.6 }}>
-                  <Icon name="alert-circle" size={15} style={{ flexShrink: 0, marginTop: 1 }} />
-                  <span>{topic.notice}</span>
+        <div
+          ref={sheetRef} className="sheet-scroll" tabIndex={-1}
+          style={{ overflowY: "auto", flex: 1,
+            paddingBottom: "max(2.5rem, env(safe-area-inset-bottom))" }}>
+          {topic && (
+            <>
+              {/* header */}
+              <div style={{ display: "flex", alignItems: "flex-start", gap: 14,
+                padding: "0 24px 18px", borderBottom: "2px solid var(--color-burnt)" }}>
+                <TopicIcon topicKey={topic.key} color={topic.iconColor} size="md" />
+                <div>
+                  <h2 id="sheet-title" style={{ fontSize: 22, fontWeight: 700,
+                    color: "var(--color-slate)", lineHeight: 1.15,
+                    letterSpacing: "-0.02em", margin: 0 }}>{topic.title}</h2>
+                  <p style={{ fontSize: 14, color: "#555", lineHeight: 1.65, margin: "8px 0 0" }}>
+                    {topic.desc}
+                  </p>
                 </div>
-              )}
+              </div>
 
-              <p style={SECTION_LABEL}>Official resources</p>
-              {topic.links.map(l => <LinkCard key={l.url + l.label} link={l} />)}
-
-              {topic.tags.length > 0 && (
-                <>
-                  <p style={{ ...SECTION_LABEL, marginTop: 24 }}>Common keywords</p>
-                  <div style={{ marginTop: 4 }}>
-                    {topic.tags.map(t => <Tag key={t.text} {...t} />)}
+              {/* body */}
+              <div style={{ padding: "20px 24px 0" }}>
+                {topic.notice && (
+                  <div style={{ display: "flex", alignItems: "flex-start", gap: 10,
+                    background: "var(--color-burnt-light)", borderLeft: "4px solid var(--color-burnt)",
+                    borderRadius: "0 6px 6px 0", padding: "12px 14px", marginBottom: 20,
+                    fontSize: 13, color: "#7A3700", lineHeight: 1.6 }}>
+                    <Icon name="alert-circle" size={15} style={{ flexShrink: 0, marginTop: 1 }} />
+                    <span>{topic.notice}</span>
                   </div>
-                </>
-              )}
-            </div>
-          </>
-        )}
+                )}
+
+                <p style={SECTION_LABEL}>Official resources</p>
+                {topic.links.map(l => {
+                  const linkKey = l.url + l.label;
+                  return (
+                    <LinkCard
+                      key={linkKey}
+                      link={{
+                        ...l,
+                        quickViewOpen: openQuickViewKey === linkKey,
+                        onToggleQuickView: () => handleQuickViewToggle(linkKey),
+                      }}
+                    />
+                  );
+                })}
+
+                {topic.tags.length > 0 && (
+                  <>
+                    <p style={{ ...SECTION_LABEL, marginTop: 24 }}>Common keywords</p>
+                    <div style={{ marginTop: 4 }}>
+                      {topic.tags.map(t => <Tag key={t.text} {...t} />)}
+                    </div>
+                  </>
+                )}
+              </div>
+            </>
+          )}
+        </div>
       </div>
     </div>
   );
