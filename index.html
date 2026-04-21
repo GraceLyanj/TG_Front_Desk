@@ -180,6 +180,12 @@ const TOPICS = [
               "How OPT applies in your case: book an ISSS international student advisor.",
             ],
           },
+          {
+            title: "QR",
+            items: [
+              "DHS Study in the States: F-1 OPT (SEVIS Help Hub).",
+            ],
+          },
         ],
       },
       { label: "Apply for SSN", url: "https://global.utexas.edu/isss/life-at-ut/ssn", source: "ISSS · Texas Global", domain: "global.utexas.edu" },
@@ -219,7 +225,7 @@ const TOPICS = [
           {
             title: "QR",
             items: [
-              "Schedule an appointment with the code.",
+              "ISSS advisor booking (in-person).",
             ],
           },
         ],
@@ -240,7 +246,7 @@ const TOPICS = [
           {
             title: "QR",
             items: [
-              "Schedule an appointment with the code.",
+              "ISSS advisor booking (virtual).",
             ],
           },
         ],
@@ -265,6 +271,12 @@ const TOPICS = [
               "Fri: 9-11:30 a.m.",
             ],
           },
+          {
+            title: "QR",
+            items: [
+              "ISSS drop-in & signature hours.",
+            ],
+          },
         ],
       },
       {
@@ -283,7 +295,7 @@ const TOPICS = [
           {
             title: "QR",
             items: [
-              "Schedule an appointment with the code.",
+              "EA peer mentor booking (not program page).",
             ],
           },
         ],
@@ -367,7 +379,7 @@ const TOPICS = [
           {
             title: "QR",
             items: [
-              "QR opens the myIO Sprintax access-code form (login required).",
+              "myIO Sprintax access-code form (UT login).",
             ],
           },
         ],
@@ -389,7 +401,7 @@ const TOPICS = [
           {
             title: "QR",
             items: [
-              "Open Sprintax login with the code.",
+              "Sprintax login (same as card).",
             ],
           },
         ],
@@ -452,7 +464,7 @@ const TOPICS = [
           {
             title: "QR",
             items: [
-              "Schedule an appointment with the code.",
+              "EA peer mentor booking.",
             ],
           },
         ],
@@ -493,7 +505,7 @@ const TOPICS = [
           {
             title: "QR",
             items: [
-              "Open myIO with this code.",
+              "ISSS myIO portal entry.",
             ],
           },
         ],
@@ -533,7 +545,9 @@ const TOPICS = [
           },
           {
             title: "QR",
-            items: ["ISSS enrollment page."],
+            items: [
+              "ISSS full-time enrollment (F-1/J-1).",
+            ],
           },
         ],
       },
@@ -551,7 +565,9 @@ const TOPICS = [
           },
           {
             title: "QR",
-            items: ["myIO."],
+            items: [
+              "myIO portal (RCL & requests).",
+            ],
           },
         ],
       },
@@ -604,7 +620,7 @@ const TOPICS = [
           {
             title: "QR",
             items: [
-              "Open myIO with this code.",
+              "ISSS myIO (check-in & requests).",
             ],
           },
         ],
@@ -647,7 +663,7 @@ const TOPICS = [
     iconColor: "teal",
     keywords: "contact phone email location address hotline scholars nueces front desk",
     title: "Contact & hours",
-    desc: "Texas Global is at 2400 Nueces St., Suite B, Austin TX 78705. Monday–Friday, 8 a.m.–5 p.m., for general questions and document pickup. Immigration advising is by appointment, not at the counter.",
+    desc: "Texas Global is at 2400 Nueces St., Suite B, Austin TX 78705. Monday–Friday, 8 a.m.–5 p.m.",
     links: [
       {
         label: "Contact ISSS (address, phone, email)",
@@ -656,7 +672,12 @@ const TOPICS = [
         domain: "global.utexas.edu",
         detailColumns: [
           ...CONTACT_GLANCE_BLOCKS.map(b => ({ title: b.title, items: [...b.items] })),
-          { title: "QR", items: ["ISSS contact page"] },
+          {
+            title: "QR",
+            items: [
+              "ISSS contact page.",
+            ],
+          },
         ],
       },
     ],
@@ -804,13 +825,36 @@ function detailColumnsUseContactCardGrid(detailColumns) {
   const last = detailColumns[detailColumns.length - 1];
   if (last.title !== "QR") return false;
   const rest = detailColumns.slice(0, -1);
+  if (rest[0].title !== "Address") return false;
   return rest.every(c => Array.isArray(c.items) && c.items.length >= 1 && c.items.length <= 4);
+}
+
+function getQrFootnoteFromColumns(detailColumns) {
+  if (!detailColumns || !detailColumns.length) return null;
+  const last = detailColumns[detailColumns.length - 1];
+  if (last.title !== "QR" || !Array.isArray(last.items) || !last.items.length) return null;
+  const text = last.items.map(s => String(s).trim()).filter(Boolean).join(" ");
+  return text || null;
+}
+
+function formatQrFootnote(raw) {
+  if (raw == null || raw === "") return "";
+  return String(raw).replace(/\.+$/, "").trim();
+}
+
+function defaultQrFootnote(qrUrl, cardUrl, linkLabel) {
+  if (cardUrl && qrUrl !== cardUrl) {
+    return "Different URL than card (booking or myIO).";
+  }
+  const label = (linkLabel || "").trim();
+  if (label) return label;
+  return "Same page as card.";
 }
 
 // ─── QR TOGGLE ────────────────────────────────────────────────────────────────
 // Built directly into the component, no post-render DOM injection.
 
-function QrToggle({ url, detail, detailColumns, isOpen, onToggle }) {
+function QrToggle({ url, cardUrl, linkLabel, detail, detailColumns, isOpen, onToggle }) {
   const onSectionClick = e => {
     e.preventDefault();
     e.stopPropagation();
@@ -845,17 +889,22 @@ function QrToggle({ url, detail, detailColumns, isOpen, onToggle }) {
       )}
       {isOpen && (() => {
         const useContactCards = detailColumns && detailColumnsUseContactCardGrid(detailColumns);
-        const qrCaption = useContactCards && detailColumns[detailColumns.length - 1].items[0];
         const infoBlocks = useContactCards ? detailColumns.slice(0, -1) : null;
+        const columnsForList = detailColumns && !useContactCards
+          ? detailColumns.filter(c => c.title !== "QR")
+          : [];
+        const qrFootnote = formatQrFootnote(
+          getQrFootnoteFromColumns(detailColumns)
+            || defaultQrFootnote(url, cardUrl, linkLabel));
         return (
-        <div style={{ marginTop: 0, display: "grid", gridTemplateColumns: "1fr 96px", gap: 10, alignItems: "start" }}>
+        <div style={{ marginTop: 0, display: "grid", gridTemplateColumns: "1fr 108px", gap: 10, alignItems: "start" }}>
           <div style={{ fontSize: 12, color: "#666", lineHeight: 1.5, minWidth: 0 }}>
             {detailColumns ? (
               useContactCards ? (
                 <ContactGlanceGrid blocks={infoBlocks} />
               ) : (
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
-                  {detailColumns.map(col => (
+                  {columnsForList.map(col => (
                     <div key={col.title}>
                       <div style={{ fontWeight: 700, color: "var(--color-slate)", marginBottom: 4 }}>{col.title}</div>
                       <ul style={{ margin: 0, paddingLeft: 18 }}>
@@ -866,19 +915,21 @@ function QrToggle({ url, detail, detailColumns, isOpen, onToggle }) {
                 </div>
               )
             ) : (
-              detail || "Scan the QR code to open this resource quickly on another device."
+              detail || "Same page as this card"
             )}
           </div>
-          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 4, flexShrink: 0 }}>
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 4,
+            flexShrink: 0, width: 108, minWidth: 108 }}>
             <img
               src={`https://quickchart.io/qr?size=150&text=${encodeURIComponent(url)}`}
               alt="" width={96} height={96}
               style={{ display: "block", border: "1px solid rgba(51,63,72,0.1)",
                 borderRadius: 8, background: "#fff", padding: 4, pointerEvents: "none" }}
             />
-            {useContactCards && qrCaption ? (
-              <span style={{ fontSize: 9, color: "#888", textAlign: "center", lineHeight: 1.25, maxWidth: 96 }}>{qrCaption}</span>
-            ) : null}
+            <span style={{
+              fontSize: 9, color: "#888", textAlign: "center", lineHeight: 1.25, width: "100%",
+              wordBreak: "break-word",
+            }}>{qrFootnote}</span>
           </div>
         </div>
         );
@@ -925,6 +976,8 @@ function LinkCard({ link }) {
       </div>
       <QrToggle
         url={qrUrl}
+        cardUrl={link.url}
+        linkLabel={link.label}
         detail={link.detail}
         detailColumns={link.detailColumns}
         isOpen={link.quickViewOpen}
@@ -1022,6 +1075,45 @@ function SearchBar({ value, onChange }) {
       />
     </div>
   );
+}
+
+function qrFootnoteForFallback(link, topicKey) {
+  const u = link.url;
+  const map = {
+    "https://global.utexas.edu/isss/immigration/f-1/employment/cpt": "ISSS CPT page.",
+    "https://careersuccess.utexas.edu/students/get-experience/zero-credit-internship-course/":
+      "UT Career Success: EXP 000/080 internship course.",
+    "https://global.utexas.edu/isss/immigration/f-1/employment/post-completion-opt": "ISSS post-completion OPT.",
+    "https://global.utexas.edu/isss/immigration/f-1/employment/stem-opt": "ISSS STEM OPT & I-983.",
+    "https://global.utexas.edu/isss/life-at-ut/ssn": "ISSS SSN page.",
+    "https://global.utexas.edu/isss/advising-services/insurance/student-plan": "ISSS student health plan & waivers.",
+    "https://www.bcbstx.com/": "BCBSTX member portal.",
+    "https://utexas.myahpcare.com/": "AHP: UT enrollment & waivers.",
+    "https://www.healthyhorns.utexas.edu/uhs/international-students.html": "UHS international student health reqs.",
+    "https://global.utexas.edu/isss/immigration/before-travel": "ISSS before-travel & signatures.",
+    "https://i94.cbp.dhs.gov/home": "CBP I-94 portal.",
+    "https://studyinthestates.dhs.gov/students/travel/form-i-515a-overview": "DHS I-515A overview.",
+    "https://global.utexas.edu/isss/advising-services/taxes/tax-preparation-software": "ISSS Sprintax / tax prep page.",
+    "https://www.sprintax.com/dashboard/login/": "Sprintax login.",
+    "https://afm.utexas.edu/tax-services/nonresident-taxes": "UT AFM nonresident taxes.",
+    "https://www.irs.gov/individuals/international-taxpayers/foreign-students-and-scholars": "IRS foreign student & scholar taxes.",
+    "https://global.utexas.edu/abroad/funding/scholarships": "EA scholarships & funding.",
+    "https://global.utexas.edu/isss/advising-services/scholarships": "ISSS scholarships.",
+    "https://utdirect.utexas.edu/apps/student/residency/": "UT Direct residency questionnaire.",
+    "https://global.utexas.edu/abroad": "Education Abroad home.",
+    "https://global.utexas.edu/abroad/apply/credit": "EA study abroad credit.",
+    "https://global.utexas.edu/isss/advising-services/myio/students/new-international-student-checkin-myio":
+      "ISSS new student check-in guide.",
+    "https://onestop.utexas.edu/registration-and-degree-planning/registering-for-classes/resolving-holds/":
+      "Texas One Stop: resolve holds.",
+    "https://global.utexas.edu/isss/immigration/immigration-updates": "ISSS immigration updates.",
+    "https://www.uscis.gov/i-983": "USCIS Form I-983.",
+    "https://studyinthestates.dhs.gov/": "DHS Study in the States hub.",
+  };
+  if (map[u]) return map[u];
+  const lab = (link.label || "").trim();
+  if (lab) return lab;
+  return "Same page as card.";
 }
 
 function buildFallbackQuickView(link, pageSummary, topicKey) {
@@ -1194,8 +1286,13 @@ function buildFallbackQuickView(link, pageSummary, topicKey) {
   }
 
   columns.push({
-    title: "Frequent questions this link answers",
+    title: "Questions this link answers",
     items: helpfulItems,
+  });
+
+  columns.push({
+    title: "QR",
+    items: [qrFootnoteForFallback(link, topicKey)],
   });
 
   return columns;
