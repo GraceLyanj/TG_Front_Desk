@@ -24,9 +24,24 @@
       }
       html, body, #root {
         height: 100%;
+        width: 100%;
+        max-width: 100%;
         overscroll-behavior: none;
         background: #bf5700;
         margin: 0;
+      }
+      .tile-grid {
+        display: grid;
+        width: 100%;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 12px;
+        margin-bottom: 22px;
+      }
+      @media (min-width: 640px) {
+        .tile-grid {
+          grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+          gap: 14px;
+        }
       }
       :root {
         --ut-7527: #D6D2C4;
@@ -98,12 +113,24 @@ const { useState, useEffect, useRef } = React;
 // All links are correct here, no post-render patching needed.
 // qrUrl on a link overrides which URL gets encoded in the QR (e.g. Sprintax code form).
 
+const PAGE_MAX_PX = 1180;
+const PAGE_INSET_X = "clamp(20px, 4vw, 48px)";
+
+const pageAlignStyle = {
+  width: "100%",
+  maxWidth: PAGE_MAX_PX,
+  marginLeft: "auto",
+  marginRight: "auto",
+  paddingLeft: PAGE_INSET_X,
+  paddingRight: PAGE_INSET_X,
+  boxSizing: "border-box",
+};
+
 const CONTACT_GLANCE_BLOCKS = [
   { title: "Address", items: ["2400 Nueces St., Suite B", "Austin, TX 78705"] },
   { title: "Phone", items: ["(512) 471-2477"] },
   { title: "Students", items: ["hotline@austin.utexas.edu"] },
   { title: "Scholars & faculty", items: ["scholars@austin.utexas.edu"] },
-  { title: "Campus mail", items: ["A7000"] },
   {
     title: "Postal",
     items: [
@@ -613,12 +640,12 @@ const TOPICS = [
     tileLabel: "Contact & hours",
     tileSub: "Location, email, phone",
     iconColor: "teal",
-    keywords: "contact phone email location address hotline scholars nueces front desk campus mail a7000 postal",
+    keywords: "contact phone email location address hotline scholars nueces front desk postal",
     title: "Contact & hours",
     desc: "Texas Global is at 2400 Nueces St., Suite B, Austin TX 78705. Monday–Friday, 8 a.m.–5 p.m., for general questions and document pickup. Immigration advising is by appointment, not at the counter.",
     links: [
       {
-        label: "Contact ISSS (address, phone, email, mail)",
+        label: "Contact ISSS (address, phone, email)",
         url: "https://global.utexas.edu/isss/about/contact",
         source: "ISSS · Texas Global",
         domain: "global.utexas.edu",
@@ -629,7 +656,7 @@ const TOPICS = [
       },
     ],
     pageContents: [
-      ["Contact page", "Address", "Phone", "Student and scholar email", "Campus mail code", "Postal mailing address"],
+      ["Contact page", "Address", "Phone", "Student and scholar email", "Postal mailing address"],
     ],
     tags: [{ text: "(512) 471-2477" }, { text: "Mon–Fri 8–5" }, { text: "2400 Nueces St." }, { text: "Walk-in" }],
   },
@@ -952,8 +979,7 @@ function TileGrid({ topics, query, onSelect }) {
         {query.trim() ? "Results" : "What does the student need?"}
       </p>
       {filtered.length > 0 ? (
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
-          gap: 12, marginBottom: 22 }}>
+        <div className="tile-grid">
           {filtered.map(t => <TopicTile key={t.key} topic={t} onClick={onSelect} />)}
         </div>
       ) : (
@@ -1146,7 +1172,7 @@ function buildFallbackQuickView(link, pageSummary, topicKey) {
   } else if (topicKey === "contact" || label.includes("contact") || label.includes("hotline")) {
     helpfulItems = [
       "Which email should students vs scholars use for general questions?",
-      "What are the ISSS address, phone number, campus mail code, and postal mailing line?",
+      "What are the ISSS address, phone number, and postal mailing line?",
     ];
   } else if (topicKey === "immigration" || label.includes("uscis") || label.includes("dhs") || label.includes("i-983")) {
     helpfulItems = [
@@ -1356,19 +1382,22 @@ function Header() {
     lineHeight: 1.35,
     wordBreak: "break-all" };
   return (
-    <header style={{ background: "#ffffff", padding: "18px 24px 16px",
+    <header style={{ background: "#ffffff", width: "100%",
       borderBottom: "1px solid rgba(51,63,72,0.1)",
-      display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 16 }}>
-      <img src={LOGO_SVG} alt="Texas Global" width="220" height="42"
-        style={{ display: "block", width: 220, height: "auto", maxWidth: "min(100%, 220px)", flexShrink: 0 }} />
-      <div style={{ textAlign: "right", minWidth: 0, flex: "0 1 auto" }}>
-        <p style={{ fontSize: 11, fontWeight: 600, color: "var(--color-burnt)",
-          textTransform: "uppercase", letterSpacing: "0.1em", margin: 0, lineHeight: 1.35 }}>
-          ISSS · Official resource links
-        </p>
-        <span style={contactLineStyle}>{HEADER_ISSS_CONTACT.phoneDisplay}</span>
-        <span style={contactLineStyle}>{HEADER_ISSS_CONTACT.studentEmail}</span>
-        <span style={contactLineStyle}>{HEADER_ISSS_CONTACT.scholarEmail}</span>
+      paddingTop: "max(12px, env(safe-area-inset-top))" }}>
+      <div style={{ ...pageAlignStyle, display: "flex", alignItems: "flex-start",
+        justifyContent: "space-between", gap: 16, paddingTop: 6, paddingBottom: 16 }}>
+        <img src={LOGO_SVG} alt="Texas Global" width="220" height="42"
+          style={{ display: "block", width: 220, height: "auto", maxWidth: "min(100%, 220px)", flexShrink: 0 }} />
+        <div style={{ textAlign: "right", minWidth: 0, flex: "0 1 auto" }}>
+          <p style={{ fontSize: 11, fontWeight: 600, color: "var(--color-burnt)",
+            textTransform: "uppercase", letterSpacing: "0.1em", margin: 0, lineHeight: 1.35 }}>
+            ISSS · Official resource links
+          </p>
+          <span style={contactLineStyle}>{HEADER_ISSS_CONTACT.phoneDisplay}</span>
+          <span style={contactLineStyle}>{HEADER_ISSS_CONTACT.studentEmail}</span>
+          <span style={contactLineStyle}>{HEADER_ISSS_CONTACT.scholarEmail}</span>
+        </div>
       </div>
     </header>
   );
@@ -1404,15 +1433,24 @@ function App() {
   const [query, setQuery] = useState("");
   const [activeTopic, setActiveTopic] = useState(null);
   return (
-    <div style={{ minHeight: "100%", background: "#f5f4f2", fontFamily: "var(--font-sans)" }}>
+    <div style={{
+      minHeight: "100dvh",
+      background: "#f5f4f2",
+      fontFamily: "var(--font-sans)",
+      paddingLeft: "max(0px, env(safe-area-inset-left))",
+      paddingRight: "max(0px, env(safe-area-inset-right))",
+    }}>
       <Header />
       <main id="app-main" tabIndex={-1} style={{ background: "var(--color-surface)",
-        padding: "22px 20px",
+        width: "100%",
+        paddingTop: 22,
         paddingBottom: "max(3rem, env(safe-area-inset-bottom))",
-        minHeight: "calc(100vh - 96px)" }}>
-        <SearchBar value={query} onChange={setQuery} />
-        <TileGrid topics={TOPICS} query={query} onSelect={setActiveTopic} />
-        <ScopeNotice />
+        minHeight: "calc(100dvh - 96px)" }}>
+        <div style={pageAlignStyle}>
+          <SearchBar value={query} onChange={setQuery} />
+          <TileGrid topics={TOPICS} query={query} onSelect={setActiveTopic} />
+          <ScopeNotice />
+        </div>
       </main>
       <BottomSheet topic={activeTopic} onClose={() => setActiveTopic(null)} />
     </div>
