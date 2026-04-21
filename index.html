@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="apple-mobile-web-app-title" content="TG Frontdesk" />
+    <meta name="apple-mobile-web-app-title" content="ISSS resources" />
     <meta name="mobile-web-app-capable" content="yes" />
-    <meta name="application-name" content="TG Frontdesk" />
+    <meta name="application-name" content="ISSS resources" />
     <meta name="format-detection" content="telephone=no" />
     <meta name="theme-color" content="#BF5700" />
     <link rel="manifest" href="manifest.webmanifest" />
@@ -16,7 +16,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    <title>TG Frontdesk</title>
+    <title>ISSS · Official resource links</title>
     <style>
       *, *:before, *:after {
         box-sizing: border-box;
@@ -106,8 +106,8 @@ const TOPICS = [
     iconColor: "orange",
     keywords: "cpt opt stem work authorization employment f1 i-983 practical training 10 business days last name ssn social security",
     title: "Work authorization",
-    desc: "F-1 students can work off-campus through CPT or OPT. Processing takes 10 business days, remind students to plan ahead and allow time for departmental approval (Step 4). Applications are sorted by last name for processing.",
-    notice: "We cannot confirm application status. Students receive a confirmation email when their application is received and again when reviewed. For specific job permissibility under OPT, point to official DHS resources.",
+    desc: "F-1 students can work off-campus through CPT or OPT. Processing takes 10 business days; plan ahead and allow time for departmental approval (Step 4). Applications are sorted by last name for processing.",
+    notice: "Application status is not confirmed by walk-in or phone. You receive a confirmation email when your application is received and again when it is reviewed. Whether a specific job is allowed under OPT is covered in official DHS resources (for example Study in the States).",
     links: [
       { label: "CPT: Curricular Practical Training", url: "https://global.utexas.edu/isss/immigration/f-1/employment/cpt", source: "ISSS · Texas Global", domain: "global.utexas.edu" },
       { label: "Zero-Credit Internship Course (EXP 000/080)", url: "https://careersuccess.utexas.edu/students/get-experience/zero-credit-internship-course/", source: "UT Career Success", domain: "careersuccess.utexas.edu" },
@@ -120,25 +120,30 @@ const TOPICS = [
         domain: "studyinthestates.dhs.gov",
         detailColumns: [
           {
-            title: "Notes",
+            title: "What this link is",
             items: [
-              "DSO recommends OPT in SEVIS; you file I-765 with USCIS for an EAD.",
-              "No work before the EAD start date.",
-              "12 months regular OPT per degree level (STEM / cap-gap are separate).",
+              "DHS Study in the States: SEVIS Help Hub article on F-1 optional practical training (OPT).",
+              "Published government reference on OPT topics, SEVIS terminology, and links to regulations and policy guidance.",
             ],
           },
           {
-            title: "",
+            title: "Personalized help",
             items: [
-              "File I-765 only after OPT is in SEVIS and you have the updated I-20.",
-              "USCIS must receive I-765 within 30 days of the DSO recommendation.",
-              "12+ months full-time CPT (same level) can disqualify OPT.",
-              "Post-completion: 90 days unemployment max; report job/address changes within 10 days.",
+              "This page is general government information.",
+              "How OPT applies in your case: book an ISSS international student advisor.",
             ],
           },
         ],
       },
       { label: "Apply for SSN", url: "https://global.utexas.edu/isss/life-at-ut/ssn", source: "ISSS · Texas Global", domain: "global.utexas.edu" },
+    ],
+    pageContents: [
+      ["CPT page", "Eligibility rules", "Full-time vs part-time limits", "OPT impact", "Step-by-step myIO workflow"],
+      ["Zero-credit internship page", "EXP 000/080 enrollment details", "When that course supports internship requirements"],
+      ["Post-completion OPT page", "Workshop modules", "Filing timeline", "Required documents", "Reporting and travel guidance"],
+      ["STEM OPT page", "I-983 requirements", "E-Verify employer conditions", "6/12/18/24-month reporting checkpoints"],
+      ["DHS SEVIS OPT page", "Federal definitions", "Policy references", "Official FAQ-style guidance on OPT"],
+      ["SSN page", "Who is eligible", "Required letter and document checklist", "How to request SSN support from ISSS"],
     ],
     tags: [{ text: "CPT" }, { text: "OPT" }, { text: "STEM OPT" }, { text: "Form I-983" }, { text: "10 business days" }, { text: "Last name A–Z" }],
   },
@@ -149,10 +154,50 @@ const TOPICS = [
     iconColor: "green",
     keywords: "appointment advisor book schedule peer mentor advising april",
     title: "Book an appointment",
-    desc: "For questions that need a one-on-one answer, students can book directly online. April appointments fill quickly, encourage students to book as early as possible.",
+    desc: "For questions that need a one-on-one answer, book directly online. April appointments fill quickly; booking early is recommended.",
     links: [
-      { label: "International student advisor (In-person)", url: "https://bookings.cloud.microsoft/book/InternationalStudentandScholarServices@utexas.onmicrosoft.com/?ismsaljsauthenabled=true", source: "ISSS · Texas Global", domain: "bookings.cloud.microsoft" },
-      { label: "International student advisor (Virtual)", url: "https://bookings.cloud.microsoft/book/ISSSInternationalStudentServicesVirtualAdvising@utexas.onmicrosoft.com/?ismsaljsauthenabled=true", source: "ISSS · Texas Global", domain: "bookings.cloud.microsoft" },
+      {
+        label: "International student advisor (In-person)",
+        url: "https://global.utexas.edu/isss/advising-services/appointments",
+        qrUrl: "https://bookings.cloud.microsoft/book/InternationalStudentandScholarServices@utexas.onmicrosoft.com/?ismsaljsauthenabled=true",
+        source: "ISSS · Texas Global",
+        domain: "global.utexas.edu",
+        detailColumns: [
+          {
+            title: "What this link is",
+            items: [
+              "ISSS Make an Appointment page with service types and appointment options.",
+            ],
+          },
+          {
+            title: "QR",
+            items: [
+              "Schedule an appointment with the code.",
+            ],
+          },
+        ],
+      },
+      {
+        label: "International student advisor (Virtual)",
+        url: "https://global.utexas.edu/isss/advising-services/appointments",
+        qrUrl: "https://bookings.cloud.microsoft/book/ISSSInternationalStudentServicesVirtualAdvising@utexas.onmicrosoft.com/?ismsaljsauthenabled=true",
+        source: "ISSS · Texas Global",
+        domain: "global.utexas.edu",
+        detailColumns: [
+          {
+            title: "What this link is",
+            items: [
+              "ISSS Make an Appointment page with service types and appointment options.",
+            ],
+          },
+          {
+            title: "QR",
+            items: [
+              "Schedule an appointment with the code.",
+            ],
+          },
+        ],
+      },
       {
         label: "Drop-in services (signature hours & express advising)",
         url: "https://global.utexas.edu/isss/advising-services/drop-in",
@@ -175,23 +220,55 @@ const TOPICS = [
           },
         ],
       },
-      { label: "Education abroad peer mentors", url: "https://outlook.office365.com/book/EducationAbroadPeerMentors@utexas.onmicrosoft.com/", source: "Education Abroad · Texas Global", domain: "outlook.office365.com" },
+      {
+        label: "Education abroad peer mentors",
+        url: "https://global.utexas.edu/abroad/about/peer-mentors-program",
+        qrUrl: "https://outlook.office365.com/book/EducationAbroadPeerMentors@utexas.onmicrosoft.com/",
+        source: "Education Abroad · Texas Global",
+        domain: "global.utexas.edu",
+        detailColumns: [
+          {
+            title: "What this link is",
+            items: [
+              "Peer Mentors Program page with advisor profiles, advising hours, and more details.",
+            ],
+          },
+          {
+            title: "QR",
+            items: [
+              "Schedule an appointment with the code.",
+            ],
+          },
+        ],
+      },
+    ],
+    pageContents: [
+      ["Advisor booking pages (in-person/virtual)", "Available appointment slots", "Direct scheduling for ISSS advisors"],
+      ["Drop-in services page", "Front desk scope", "Signature and SSN support hours", "Express advising check-in windows"],
+      ["Peer mentor booking page", "Calendar scheduling for Education Abroad peer advising sessions"],
     ],
     tags: [{ text: "Advisor", color: "blue" }, { text: "Peer mentor", color: "teal" }, { text: "April" }, { text: "Study abroad" }],
   },
   {
     key: "insurance",
-    tileLabel: "Health insurance",
-    tileSub: "Plan, waivers & card",
+    tileLabel: "Health & medical requirements",
+    tileSub: "Insurance, vaccines, clearance",
     iconColor: "blue",
     keywords: "insurance health plan bcbs waiver card benefits summer graduate ahs ahp",
-    title: "Health insurance",
-    desc: "International students are automatically enrolled in the UT student health plan. Waivers are available for students with equivalent coverage. Graduates in May may request a summer waiver. For a lost card, direct them to the plan website to view their digital ID.",
-    notice: "We cannot answer specific coverage questions. For benefits explanations and card details, point students to the official plan pages below.",
+    title: "Health & medical requirements",
+    desc: "This section combines UT student health insurance resources with medical clearance and immunization requirements for international students. Use these links for plan access, waivers, and pre-registration health compliance steps.",
+    notice: "Insurance and medical clearance are separate processes. For treatment or diagnosis decisions, use licensed medical providers.",
     links: [
       { label: "Student health plan (overview & waivers)", url: "https://global.utexas.edu/isss/advising-services/insurance/student-plan", source: "ISSS · Texas Global", domain: "global.utexas.edu" },
       { label: "Member portal (find providers, view ID card)", url: "https://www.bcbstx.com/", source: "BCBS · Blue Cross Blue Shield Texas", domain: "bcbstx.com" },
       { label: "UT Austin enrollment, waivers & billing", url: "https://utexas.myahpcare.com/", source: "AHP · Academic HealthPlans", domain: "utexas.myahpcare.com" },
+      { label: "International student immunization & medical clearance", url: "https://www.healthyhorns.utexas.edu/uhs/international-students.html", source: "University Health Services · UT Austin", domain: "healthyhorns.utexas.edu" },
+    ],
+    pageContents: [
+      ["ISSS insurance pages", "UT SHIP basics", "Automatic enrollment rules", "Waiver categories", "Deadline guidance"],
+      ["BCBSTX member portal", "Provider search", "Digital ID card access", "Claims", "Benefits", "Account tools"],
+      ["AHP portal", "Term enrollment and waiver submission", "Policy documents", "Billing dates", "Waiver support resources"],
+      ["UHS international student requirements page", "Required immunizations", "TB screening and testing steps", "Med+Proctor submission process", "Medical hold removal timeline"],
     ],
     tags: [{ text: "Card" }, { text: "Waiver" }, { text: "BCBS", color: "blue" }, { text: "AHP", color: "blue" }, { text: "Summer waiver" }, { text: "Graduate" }],
   },
@@ -203,11 +280,16 @@ const TOPICS = [
     keywords: "travel signature i20 i-515a i-94 dhs cbp border re-entry before travel arrival record",
     title: "Travel & signatures",
     desc: "Students must have a valid travel signature on their I-20 before leaving the US. The Form I-515A is a DHS form for students who arrived at a port of entry without a proper visa or entry document. The I-94 is the official CBP arrival record.",
-    notice: "Remind students: request travel signatures BEFORE booking international travel. Processing takes time.",
+    notice: "Request travel signatures before booking international travel; processing takes time.",
     links: [
       { label: "Before-travel signature info", url: "https://global.utexas.edu/isss/immigration/before-travel", source: "ISSS · Texas Global", domain: "global.utexas.edu" },
       { label: "I-94 (official arrival record)", url: "https://i94.cbp.dhs.gov/home", source: "CBP · DHS", domain: "i94.cbp.dhs.gov" },
       { label: "Form I-515A overview", url: "https://studyinthestates.dhs.gov/students/travel/form-i-515a-overview", source: "DHS · Study in the States", domain: "studyinthestates.dhs.gov" },
+    ],
+    pageContents: [
+      ["Know Before You Travel page", "Required re-entry documents", "Travel-signature validity windows", "Visa and travel risk notes"],
+      ["I-94 portal", "Retrieve and print arrival records", "Travel history", "Correction and help options from CBP"],
+      ["I-515A overview", "Why the form is issued", "30-day response requirements", "Submission steps with your school official"],
     ],
     tags: [{ text: "I-20" }, { text: "Travel signature" }, { text: "I-94", color: "blue" }, { text: "I-515A", color: "blue" }, { text: "DHS", color: "blue" }, { text: "Re-entry" }],
   },
@@ -219,7 +301,7 @@ const TOPICS = [
     keywords: "taxes sprintax tax code irs withholding non-resident treaty email ssn social security itin",
     title: "Taxes",
     desc: "Sprintax is the recommended tax prep software for international students. UT does not have a campus login, students must create their own account. The UT discount code is found on the ISSS taxes page.",
-    notice: "We are not tax advisors. For specific treaty or withholding questions, point students to the IRS or Sprintax directly.",
+    notice: "ISSS does not provide tax advice. Treaty, withholding, and filing questions belong with the IRS, Sprintax, or a qualified tax professional.",
     links: [
       {
         label: "Get the Sprintax access code",
@@ -229,17 +311,16 @@ const TOPICS = [
         qrUrl: "https://isss.io.utexas.edu/istart/controllers/client/ClientEngine.cfm?menuFlag=true&serviceid=EFormGTPAccessCode0ServiceProvider",
         detailColumns: [
           {
-            title: "Key information",
+            title: "What this link is",
             items: [
-              "Eligible users include current F-1/J-1, OPT/STEM OPT, and former F-1/J-1 users who still have myIO access.",
-              "Before starting, gather: U.S. tax ID number, passport, U.S. arrival/departure history (I-94), and prior nonresident returns.",
-              "If stuck, Sprintax support is available via hello@sprintax.com and live chat.",
+              "ISSS page on nonresident tax preparation software (Sprintax) and access through myIO.",
+              "Eligibility and what to have ready are described on that ISSS page and in Sprintax’s own materials.",
             ],
           },
           {
-            title: "Quick note",
+            title: "QR",
             items: [
-              "This QR code goes directly to the Sprintax access-code page (after myIO login).",
+              "QR opens the myIO Sprintax access-code form (login required).",
             ],
           },
         ],
@@ -251,12 +332,17 @@ const TOPICS = [
         domain: "sprintax.com",
         detailColumns: [
           {
-            title: "Sprintax Steps",
+            title: "What this link is",
             items: [
-              "Go to Returns.",
-              "Do NOT use the campus login option.",
-              "Log in with your own email address.",
-              "Fee waiver applies at checkout with a code accessed in myIO.",
+              "Sprintax account login page (vendor site).",
+              "Sign-in and fee waiver details are on Sprintax and on the ISSS tax page above, not summarized here.",
+              "Login or access issues: Sprintax help or the ISSS tax preparation page.",
+            ],
+          },
+          {
+            title: "QR",
+            items: [
+              "Open Sprintax login with the code.",
             ],
           },
         ],
@@ -264,6 +350,13 @@ const TOPICS = [
       { label: "Apply for SSN", url: "https://global.utexas.edu/isss/life-at-ut/ssn", source: "ISSS · Texas Global", domain: "global.utexas.edu" },
       { label: "Nonresident taxes (AFM)", url: "https://afm.utexas.edu/tax-services/nonresident-taxes", source: "Accounting & Financial Management · UT Austin", domain: "afm.utexas.edu" },
       { label: "Tax guide for international students & scholars", url: "https://www.irs.gov/individuals/international-taxpayers/foreign-students-and-scholars", source: "IRS · Internal Revenue Service", domain: "irs.gov" },
+    ],
+    pageContents: [
+      ["ISSS Sprintax page", "Eligibility", "Access-code timing", "Required tax documents", "What Sprintax covers"],
+      ["Sprintax login page", "Secure sign-in", "Prepare federal nonresident returns", "Required forms"],
+      ["SSN page", "Identification and support details for SSN or ITIN tax context"],
+      ["UT AFM nonresident tax page", "Campus tax-process references", "UT-specific nonresident tax information"],
+      ["IRS international students and scholars page", "Official federal filing rules", "Treaty references", "Form guidance"],
     ],
     tags: [{ text: "Sprintax" }, { text: "Tax code" }, { text: "No campus login" }, { text: "IRS", color: "blue" }, { text: "Non-resident" }],
   },
@@ -280,6 +373,11 @@ const TOPICS = [
       { label: "ISSS scholarships", url: "https://global.utexas.edu/isss/advising-services/scholarships", source: "ISSS · Texas Global", domain: "global.utexas.edu" },
       { label: "Texas residency questionnaire", url: "https://utdirect.utexas.edu/apps/student/residency/", source: "UT Direct · UT Austin", domain: "utdirect.utexas.edu" },
     ],
+    pageContents: [
+      ["Education Abroad funding page", "Scholarship cycles", "Eligibility notes", "LASSO process", "Major funding programs"],
+      ["ISSS scholarships page", "International student scholarship options", "Application windows", "Award-specific criteria"],
+      ["UT Direct residency questionnaire", "Online workflow", "Submit and update tuition-residency information"],
+    ],
     tags: [{ text: "Scholarship", color: "purple" }, { text: "Study abroad funding", color: "purple" }, { text: "ISSS scholarships", color: "purple" }, { text: "Tuition" }, { text: "Residency questionnaire" }, { text: "Wire transfer" }],
   },
   {
@@ -292,9 +390,34 @@ const TOPICS = [
     desc: "Education Abroad helps students explore exchange programs, international internships, faculty-led trips, and May Terms Abroad. Students are encouraged to attend an info session or meet with a peer mentor first.",
     links: [
       { label: "Education Abroad programs & exchanges", url: "https://global.utexas.edu/abroad", source: "Education Abroad · Texas Global", domain: "global.utexas.edu" },
-      { label: "Book a peer mentor appointment", url: "https://outlook.office365.com/book/EducationAbroadPeerMentors@utexas.onmicrosoft.com/", source: "Education Abroad · Texas Global", domain: "outlook.office365.com" },
+      {
+        label: "Book a peer mentor appointment",
+        url: "https://outlook.office365.com/book/EducationAbroadPeerMentors@utexas.onmicrosoft.com/",
+        source: "Education Abroad · Texas Global",
+        domain: "outlook.office365.com",
+        detailColumns: [
+          {
+            title: "What this link is",
+            items: [
+              "Direct booking page for Education Abroad peer mentor appointments.",
+            ],
+          },
+          {
+            title: "QR",
+            items: [
+              "Schedule an appointment with the code.",
+            ],
+          },
+        ],
+      },
       { label: "Study abroad credit", url: "https://global.utexas.edu/abroad/apply/credit", source: "Education Abroad · Texas Global", domain: "global.utexas.edu" },
       { label: "Education abroad scholarships & funding", url: "https://global.utexas.edu/abroad/funding/scholarships", source: "Education Abroad · Texas Global", domain: "global.utexas.edu" },
+    ],
+    pageContents: [
+      ["Programs page", "Exchange options", "Internship options", "Faculty-led options", "Term options", "Application entry points"],
+      ["Peer mentor booking page", "Advisor-style student-to-student sessions", "First-step planning support"],
+      ["Study abroad credit page", "Transfer and in-residence credit processes", "Checklists", "Timeline expectations"],
+      ["Funding page", "Scholarship opportunities", "Dates", "How to search and apply through LASSO"],
     ],
     tags: [{ text: "Exchange" }, { text: "Peer mentor", color: "teal" }, { text: "Internship abroad" }, { text: "May Term" }, { text: "Scholarships" }],
   },
@@ -306,12 +429,91 @@ const TOPICS = [
     keywords: "myio request services portal students scholars departments immigration benefits case status documents",
     title: "myIO",
     desc: "myIO is the main ISSS portal for students, scholars, and departments to submit requests, manage immigration records, and track case progress.",
-    notice: "For myIO support, direct students to the portal entrance first and then to the correct student request page.",
+    notice: "For myIO tasks, start at the portal entrance, then open the student request or guide that matches what you need.",
     links: [
-      { label: "myIO (portal entrance)", url: "https://global.utexas.edu/isss/advising-services/myio", source: "ISSS · Texas Global", domain: "global.utexas.edu" },
+      {
+        label: "myIO (portal entrance)",
+        url: "https://global.utexas.edu/isss/advising-services/myio",
+        source: "ISSS · Texas Global",
+        domain: "global.utexas.edu",
+        detailColumns: [
+          {
+            title: "What this link is",
+            items: [
+              "Official myIO portal entry page for student immigration request services.",
+            ],
+          },
+          {
+            title: "QR",
+            items: [
+              "Open myIO with this code.",
+            ],
+          },
+        ],
+      },
       { label: "myIO new student check-in guide", url: "https://global.utexas.edu/isss/advising-services/myio/students/new-international-student-checkin-myio", source: "ISSS · Texas Global", domain: "global.utexas.edu" },
     ],
+    pageContents: [
+      ["myIO portal page", "Submit immigration requests", "Service forms", "Case and document updates"],
+      ["New check-in guide", "Admissions tasks", "Pre-arrival tasks", "Arrival tasks", "Document and timeline requirements"],
+    ],
     tags: [{ text: "myIO" }, { text: "Portal" }, { text: "Student requests" }, { text: "Case status" }],
+  },
+  {
+    key: "enrollment",
+    tileLabel: "Full-time enrollment & visa status",
+    tileSub: "Full-time, RCL, leave",
+    iconColor: "blue",
+    keywords: "full time full-time enrollment reduced course load rcl final semester withdraw withdrawal leave of absence sevis credit hours online hybrid in person f1 f-1 j1 j-1 myio 12th class day vacation summer in absentia",
+    title: "Full-time enrollment & visa status",
+    desc: "ISSS publishes credit-hour minimums, modality rules, and deadlines for maintaining F-1/J-1 status each term. Use the official page for tables and examples; use myIO when a Reduced Course Load or similar request is required.",
+    notice: "Short bullets under the first link’s quick view; full detail on ISSS.",
+    links: [
+      {
+        label: "Full-time enrollment requirements (F-1 & J-1)",
+        url: "https://global.utexas.edu/isss/immigration/full-time-enrollment-requirements-f-1-and-j-1-students",
+        source: "ISSS · Texas Global",
+        domain: "global.utexas.edu",
+        detailColumns: [
+          {
+            title: "Reminders",
+            items: [
+              "ISSS page: credit totals, in-person/online limits, RCL types, summer.",
+              "Final term, part-time: myIO > F-1/J-1 Student Services > Reduced Course Load Request, by first class day.",
+              "No dropping below full-time until ISSS approves an RCL.",
+              "Withdrawal or leave: ISSS first—hotline@austin.utexas.edu.",
+            ],
+          },
+          {
+            title: "QR",
+            items: ["ISSS enrollment page."],
+          },
+        ],
+      },
+      {
+        label: "myIO (portal entrance)",
+        url: "https://global.utexas.edu/isss/advising-services/myio",
+        source: "ISSS · Texas Global",
+        domain: "global.utexas.edu",
+        detailColumns: [
+          {
+            title: "What this link is",
+            items: [
+              "Opens myIO. RCL: F-1/J-1 Student Services > Reduced Course Load Request.",
+            ],
+          },
+          {
+            title: "QR",
+            items: ["myIO."],
+          },
+        ],
+      },
+    ],
+    pageContents: [
+      ["Full-time enrollment page", "Credit minimums by level", "In-person vs online/hybrid limits", "12th class day deadline", "Summer and in-absentia notes", "RCL categories and restrictions"],
+      ["myIO portal", "Reduced Course Load Request", "Other F-1/J-1 student services forms"],
+    ],
+    tags: [{ text: "Full-time", color: "blue" }, { text: "RCL", color: "blue" }, { text: "F-1" }, { text: "J-1" }, { text: "SEVIS" }, { text: "Withdrawal" }],
   },
   {
     key: "academic",
@@ -325,6 +527,10 @@ const TOPICS = [
       { label: "Resolving registration holds", url: "https://onestop.utexas.edu/registration-and-degree-planning/registering-for-classes/resolving-holds/", source: "Texas One Stop · UT Austin", domain: "onestop.utexas.edu" },
       { label: "Study abroad credit", url: "https://global.utexas.edu/abroad/apply/credit", source: "Education Abroad · Texas Global", domain: "global.utexas.edu" },
     ],
+    pageContents: [
+      ["Resolving holds page", "RIS steps", "Hold categories", "Contact routes for clearing registration blockers"],
+      ["Study abroad credit page", "How international coursework maps to UT credit", "GPA handling"],
+    ],
     tags: [{ text: "Registration" }, { text: "RIS" }, { text: "Holds" }, { text: "Texas One Stop", color: "blue" }],
   },
   {
@@ -336,8 +542,31 @@ const TOPICS = [
     title: "New student check-in",
     desc: "New international students must complete the myIO check-in process before the semester begins. This includes financial verification, uploading documents, and confirming enrollment status.",
     links: [
-      { label: "myIO Request Services (portal entrance)", url: "https://global.utexas.edu/isss/advising-services/myio", source: "ISSS · Texas Global", domain: "global.utexas.edu" },
+      {
+        label: "myIO Request Services (portal entrance)",
+        url: "https://global.utexas.edu/isss/advising-services/myio",
+        source: "ISSS · Texas Global",
+        domain: "global.utexas.edu",
+        detailColumns: [
+          {
+            title: "What this link is",
+            items: [
+              "Official myIO request-services portal entry page.",
+            ],
+          },
+          {
+            title: "QR",
+            items: [
+              "Open myIO with this code.",
+            ],
+          },
+        ],
+      },
       { label: "New student check-in guide", url: "https://global.utexas.edu/isss/advising-services/myio/students/new-international-student-checkin-myio", source: "ISSS · Texas Global", domain: "global.utexas.edu" },
+    ],
+    pageContents: [
+      ["myIO portal page", "Login and request center", "International student service workflows"],
+      ["Check-in guide page", "Required forms", "Financial certification", "Arrival confirmation steps to clear holds"],
     ],
     tags: [{ text: "myIO" }, { text: "New student" }, { text: "Financial verification" }, { text: "Check-in" }],
   },
@@ -348,13 +577,19 @@ const TOPICS = [
     iconColor: "red",
     keywords: "immigration forms i-515a i-983 sevis dhs uscis status updates policy urgent",
     title: "Immigration forms & updates",
-    desc: "Key government forms and official immigration resources. ISSS monitors policy changes, direct students with urgent concerns to the immigration updates page or an advisor.",
-    notice: "For questions about specific immigration circumstances, always refer to an ISSS advisor. Do not interpret policy.",
+    desc: "Key government forms and official immigration resources. ISSS posts immigration policy updates; urgent or case-specific questions belong with an advisor or those update pages.",
+    notice: "Immigration questions that depend on your situation should go to an ISSS advisor. This page links to official sources rather than summarizing or interpreting policy.",
     links: [
       { label: "Immigration policy updates", url: "https://global.utexas.edu/isss/immigration/immigration-updates", source: "ISSS · Texas Global", domain: "global.utexas.edu" },
       { label: "Form I-515A overview", url: "https://studyinthestates.dhs.gov/students/travel/form-i-515a-overview", source: "DHS · Study in the States", domain: "studyinthestates.dhs.gov" },
       { label: "Form I-983 (STEM OPT training plan)", url: "https://www.uscis.gov/i-983", source: "USCIS", domain: "uscis.gov" },
       { label: "Student resource hub", url: "https://studyinthestates.dhs.gov/", source: "DHS · Study in the States", domain: "studyinthestates.dhs.gov" },
+    ],
+    pageContents: [
+      ["ISSS immigration updates page", "University-facing alerts", "Guidance tied to policy changes"],
+      ["DHS I-515A page", "Temporary-entry form purpose", "Required follow-up documents", "Compliance timeline"],
+      ["USCIS I-983 page", "Official form", "Instructions", "STEM OPT training-plan requirements"],
+      ["Study in the States hub", "Federal student visa resources", "Travel and employment topics", "SEVIS help content"],
     ],
     tags: [{ text: "I-515A", color: "blue" }, { text: "I-983", color: "blue" }, { text: "DHS", color: "blue" }, { text: "SEVIS" }, { text: "Policy updates" }],
   },
@@ -363,14 +598,38 @@ const TOPICS = [
     tileLabel: "Contact & hours",
     tileSub: "Location, email, phone",
     iconColor: "teal",
-    keywords: "contact hours phone email location address hotline nueces",
+    keywords: "contact phone email location address hotline scholars nueces front desk campus mail a7000 postal",
     title: "Contact & hours",
-    desc: "Texas Global is located at 2400 Nueces St., Suite B, Austin TX 78705. Front desk hours are Monday–Friday, 8 a.m.–5 p.m. The front desk assists with general questions and document pickups only, not immigration advising.",
+    desc: "Texas Global is at 2400 Nueces St., Suite B, Austin TX 78705. Monday–Friday, 8 a.m.–5 p.m., for general questions and document pickup. Immigration advising is by appointment, not at the counter.",
     links: [
-      { label: "Contact page, location & office hours", url: "https://global.utexas.edu/isss/about/contact", source: "ISSS · Texas Global", domain: "global.utexas.edu" },
-      { label: "Hotline email (hotline@austin.utexas.edu)", url: "https://global.utexas.edu/isss/about/contact", source: "ISSS · Texas Global", domain: "global.utexas.edu" },
+      {
+        label: "Contact ISSS (address, phone, email, mail)",
+        url: "https://global.utexas.edu/isss/about/contact",
+        source: "ISSS · Texas Global",
+        domain: "global.utexas.edu",
+        detailColumns: [
+          {
+            title: "Contact (ISSS / Texas Global)",
+            items: [
+              "Address: 2400 Nueces St., Suite B, Austin, TX 78705",
+              "Phone: (512) 471-2477",
+              "Students: hotline@austin.utexas.edu",
+              "Scholars and faculty: scholars@austin.utexas.edu",
+              "Campus mail code: A7000",
+              "Postal mail: The University of Texas at Austin, Texas Global ISSS, 2400 Nueces St., Suite B, Austin, TX 78705",
+            ],
+          },
+          {
+            title: "QR",
+            items: ["ISSS contact page."],
+          },
+        ],
+      },
     ],
-    tags: [{ text: "(512) 471-2477" }, { text: "Mon–Fri 8–5" }, { text: "2400 Nueces St." }, { text: "Front desk" }],
+    pageContents: [
+      ["Contact page", "Address", "Phone", "Student and scholar email", "Campus mail code", "Postal mailing address"],
+    ],
+    tags: [{ text: "(512) 471-2477" }, { text: "Mon–Fri 8–5" }, { text: "2400 Nueces St." }, { text: "Walk-in" }],
   },
 ];
 
@@ -399,7 +658,7 @@ const ICONS = {
 const TOPIC_ICON = {
   work: "briefcase", appt: "calendar-check-2", insurance: "heart-pulse",
   travel: "plane", taxes: "calculator", financial: "wallet",
-  studyabroad: "map", myio: "landmark", academic: "graduation-cap", checkin: "user-check",
+  studyabroad: "map", myio: "landmark", enrollment: "info", academic: "graduation-cap", checkin: "user-check",
   immigration: "files", contact: "headset",
 };
 
@@ -662,6 +921,183 @@ function SearchBar({ value, onChange }) {
   );
 }
 
+function buildFallbackQuickView(link, pageSummary, topicKey) {
+  if (!pageSummary) return undefined;
+
+  const label = (link.label || "").toLowerCase();
+  const summaryItems = Array.isArray(pageSummary)
+    ? pageSummary.filter(Boolean)
+    : [String(pageSummary).trim()].filter(Boolean);
+
+  const columns = [
+    {
+      title: "What this link is",
+      items: summaryItems,
+    },
+  ];
+
+  let helpfulItems = [];
+
+  if (topicKey === "appt" || label.includes("appointment") || label.includes("book")) {
+    helpfulItems = [
+      "Which booking page should I use for advisor appointments vs peer mentor sessions?",
+      "What should I prepare before booking so I choose the correct appointment type?",
+    ];
+  } else if (topicKey === "travel" || label.includes("travel") || label.includes("i-94") || label.includes("i-515a")) {
+    if (link.url === "https://global.utexas.edu/isss/immigration/before-travel") {
+      helpfulItems = [
+        "Which travel documents must I carry to re-enter in valid F-1 status?",
+        "When should I request a new travel signature before my trip dates?",
+      ];
+    } else if (link.url === "https://i94.cbp.dhs.gov/home") {
+      helpfulItems = [
+        "How do I download my latest I-94 record and travel history from CBP?",
+        "What should I do if my I-94 class of admission or admit-until notation looks wrong?",
+      ];
+    } else {
+      helpfulItems = [
+        "Why was Form I-515A issued at the port of entry, and what is the 30-day deadline?",
+        "Where do I submit I-515A documents with ISSS so my SEVIS record stays active?",
+      ];
+    }
+  } else if (topicKey === "insurance" || label.includes("insurance") || label.includes("waiver")) {
+    if (link.url === "https://www.healthyhorns.utexas.edu/uhs/international-students.html") {
+      helpfulItems = [
+        "Which vaccines, TB screening steps, and deadlines are required before registration?",
+        "How do I upload records in Med+Proctor and track medical hold removal timing?",
+      ];
+    } else if (link.url === "https://www.bcbstx.com/") {
+      helpfulItems = [
+        "How do I sign in to BCBS to download my insurance ID card and verify active coverage?",
+        "How can I find in-network doctors, urgent care, and pharmacies near Austin?",
+      ];
+    } else if (link.url === "https://utexas.myahpcare.com/") {
+      helpfulItems = [
+        "Where do I submit a UT SHIP waiver in AHP and what documentation is required?",
+        "How do I check enrollment, premium billing dates, and waiver decision status?",
+      ];
+    } else {
+      helpfulItems = [
+        "Who is automatically enrolled in UT SHIP, and who can request a waiver?",
+        "What are the term-by-term waiver deadlines and support contacts for insurance questions?",
+      ];
+    }
+  } else if (topicKey === "taxes" || label.includes("tax") || label.includes("sprintax") || label.includes("irs")) {
+    if (link.url === "https://global.utexas.edu/isss/advising-services/taxes/tax-preparation-software") {
+      helpfulItems = [
+        "How do I access the UT Sprintax code in myIO and when is it released each tax season?",
+        "What documents should I collect before starting Sprintax as a nonresident filer?",
+      ];
+    } else if (link.url === "https://www.sprintax.com/dashboard/login/") {
+      helpfulItems = [
+        "Where do I log in to continue a Sprintax return and review filing status?",
+        "What should I do if I have login, payment, or e-file issues in Sprintax?",
+      ];
+    } else if (link.url === "https://afm.utexas.edu/tax-services/nonresident-taxes") {
+      helpfulItems = [
+        "What UT payroll/tax guidance applies to nonresident students with campus employment?",
+        "Where can I confirm treaty and withholding details used by UT systems?",
+      ];
+    } else {
+      helpfulItems = [
+        "Which IRS forms are commonly required for F-1/J-1 nonresident tax filing?",
+        "How do I determine whether my case is IRS policy guidance vs school process support?",
+      ];
+    }
+  } else if (topicKey === "work" || label.includes("cpt") || label.includes("opt") || label.includes("stem")) {
+    if (link.url === "https://global.utexas.edu/isss/immigration/f-1/employment/cpt") {
+      helpfulItems = [
+        "Do I need an internship offer and department approval before CPT submission?",
+        "Can I start working before my CPT I-20 is issued?",
+      ];
+    } else if (link.url === "https://careersuccess.utexas.edu/students/get-experience/zero-credit-internship-course/") {
+      helpfulItems = [
+        "Should I enroll in EXP 000 or EXP 080 for my internship case?",
+        "Does this zero-credit course satisfy the academic component tied to CPT?",
+      ];
+    } else if (link.url === "https://global.utexas.edu/isss/immigration/f-1/employment/post-completion-opt") {
+      helpfulItems = [
+        "What is my OPT filing window based on my graduation date?",
+        "What myIO steps are required before I file Form I-765 with USCIS?",
+      ];
+    } else if (link.url === "https://global.utexas.edu/isss/immigration/f-1/employment/stem-opt") {
+      helpfulItems = [
+        "Does my degree CIP code and employer meet STEM OPT requirements?",
+        "What reports are due at 6, 12, 18, and 24 months?",
+      ];
+    } else if (link.url === "https://studyinthestates.dhs.gov/sevis-help-hub/student-records/fm-student-employment/f-1-optional-practical-training-opt") {
+      helpfulItems = [
+        "What are the official DHS/SEVIS rules for F-1 OPT?",
+        "Which OPT topics are federal guidance vs school-specific process?",
+      ];
+    } else if (link.url === "https://global.utexas.edu/isss/life-at-ut/ssn") {
+      helpfulItems = [
+        "When am I eligible to apply for an SSN as an F-1 student worker?",
+        "What documents and verification letters do I need for the SSA visit?",
+      ];
+    } else {
+      helpfulItems = [
+        "Am I eligible for CPT/OPT/STEM OPT for my situation?",
+        "What are the application steps and processing timelines?",
+      ];
+    }
+  } else if (topicKey === "financial" || label.includes("scholarship") || label.includes("funding")) {
+    helpfulItems = [
+      "Which Texas Global funding programs match my level, major, or study-abroad plan?",
+      "What are the application windows, required documents, and award timelines for each scholarship?",
+    ];
+  } else if (topicKey === "myio" || topicKey === "checkin" || label.includes("myio") || label.includes("check-in")) {
+    helpfulItems = [
+      "Which myIO e-form should I submit for check-in, reduced course load, or document requests?",
+      "How do I monitor myIO case messages and upload missing documents correctly?",
+    ];
+  } else if (topicKey === "enrollment" || label.includes("full-time enrollment") || label.includes("reduced course load")) {
+    if (link.url === "https://global.utexas.edu/isss/immigration/full-time-enrollment-requirements-f-1-and-j-1-students") {
+      helpfulItems = [
+        "When do I need a Final Term RCL and what is the deadline to submit it in myIO?",
+        "How many total credits and in-person (or hybrid) credits do I need for F-1 vs J-1 this term?",
+      ];
+    } else if (link.url === "https://global.utexas.edu/isss/advising-services/myio") {
+      helpfulItems = [
+        "Where in myIO do I open F-1/J-1 Student Services > Reduced Course Load Request?",
+        "Can I drop a class before ISSS approves my RCL or withdrawal request?",
+      ];
+    } else {
+      helpfulItems = [
+        "What happens to my SEVIS record if I drop below full-time without ISSS approval?",
+        "Who do I email first if I am considering a withdrawal or leave of absence?",
+      ];
+    }
+  } else if (topicKey === "academic" || label.includes("hold") || label.includes("registration")) {
+    helpfulItems = [
+      "Is this hold caused by immigration check-in, medical clearance, advising, or another office?",
+      "What exact step removes the hold and how long does release processing usually take?",
+    ];
+  } else if (topicKey === "contact" || label.includes("contact") || label.includes("hotline")) {
+    helpfulItems = [
+      "Which email should students vs scholars use for general questions?",
+      "What are the ISSS address, phone number, campus mail code, and postal mailing line?",
+    ];
+  } else if (topicKey === "immigration" || label.includes("uscis") || label.includes("dhs") || label.includes("i-983")) {
+    helpfulItems = [
+      "Where are the official USCIS/DHS instructions for this form and current policy updates?",
+      "Which parts of this issue need case-specific advising from ISSS rather than general guidance?",
+    ];
+  } else {
+    helpfulItems = [
+      "What concrete step or requirement can I complete using this page right now?",
+      "If this page does not match my case, which office or resource should I open next?",
+    ];
+  }
+
+  columns.push({
+    title: "Frequent questions this link answers",
+    items: helpfulItems,
+  });
+
+  return columns;
+}
+
 // ─── BOTTOM SHEET ─────────────────────────────────────────────────────────────
 
 const SECTION_LABEL = {
@@ -801,28 +1237,26 @@ function BottomSheet({ topic, onClose }) {
                 )}
 
                 <p style={SECTION_LABEL}>Official resources</p>
-                {topic.links.map(l => {
+                {topic.links.map((l, idx) => {
                   const linkKey = l.url + l.label;
+                  const pageSummary = topic.pageContents && topic.pageContents[idx];
+                  const linkDetailColumns = l.detailColumns || buildFallbackQuickView(l, pageSummary, topic.key);
+                  const linkDetail = l.detail || (!linkDetailColumns && pageSummary ? pageSummary : undefined);
                   return (
-                    <LinkCard
-                      key={linkKey}
-                      link={{
-                        ...l,
-                        quickViewOpen: openQuickViewKey === linkKey,
-                        onToggleQuickView: () => handleQuickViewToggle(linkKey),
-                      }}
-                    />
+                    <div key={linkKey} style={{ marginBottom: 10 }}>
+                      <LinkCard
+                        link={{
+                          ...l,
+                          detailColumns: linkDetailColumns,
+                          detail: linkDetail,
+                          quickViewOpen: openQuickViewKey === linkKey,
+                          onToggleQuickView: () => handleQuickViewToggle(linkKey),
+                        }}
+                      />
+                    </div>
                   );
                 })}
 
-                {topic.tags.length > 0 && (
-                  <>
-                    <p style={{ ...SECTION_LABEL, marginTop: 24 }}>Common keywords</p>
-                    <div style={{ marginTop: 4 }}>
-                      {topic.tags.map(t => <Tag key={t.text} {...t} />)}
-                    </div>
-                  </>
-                )}
               </div>
             </>
           )}
@@ -845,7 +1279,7 @@ function Header() {
         style={{ display: "block", width: 220, height: "auto", maxWidth: "100%" }} />
       <p style={{ fontSize: 11, fontWeight: 600, color: "var(--color-burnt)",
         textTransform: "uppercase", letterSpacing: "0.1em", margin: 0 }}>
-        Front Desk · ISSS Reference
+        ISSS · Official resource links
       </p>
     </header>
   );
@@ -864,11 +1298,11 @@ function ScopeNotice() {
       </div>
       <div>
         <p style={{ fontSize: 12, fontWeight: 700, color: "var(--color-slate)",
-          letterSpacing: "0.02em", margin: "0 0 6px" }}>Front Desk Responsibility</p>
+          letterSpacing: "0.02em", margin: "0 0 6px" }}>About this page</p>
         <p style={{ fontSize: 13, color: "var(--color-slate)", lineHeight: 1.6, margin: 0 }}>
-          We provide official resource links and direct students to advisors. We cannot provide
-          immigration advising or answer questions without a pointable resource. For specific
-          questions, students should book an advisor appointment.
+          This tool lists official ISSS and campus links. It does not replace individualized
+          immigration advising. If your question depends on your personal situation, book an
+          appointment with an international student advisor.
         </p>
       </div>
     </div>

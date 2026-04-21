@@ -1,7 +1,7 @@
 {
-  "name": "TG Frontdesk",
-  "short_name": "TG Frontdesk",
-  "description": "Texas Global front desk reference links (ISSS).",
+  "name": "ISSS · Official resource links",
+  "short_name": "ISSS resources",
+  "description": "Official ISSS and campus resource links (Texas Global).",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
