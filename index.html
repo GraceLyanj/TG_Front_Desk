@@ -154,7 +154,6 @@ const TOPICS = [
     keywords: "cpt opt stem work authorization employment f1 i-983 practical training 10 business days last name ssn social security",
     title: "Work authorization",
     desc: "F-1 students can work off-campus through CPT or OPT. Processing takes 10 business days. Applications are sorted by last name for processing.",
-    notice: "Application status is not confirmed by walk-in or phone. You receive a confirmation email when your application is received and again when it is reviewed. ",
     links: [
       { label: "CPT: Curricular Practical Training", url: "https://global.utexas.edu/isss/immigration/f-1/employment/cpt", source: "ISSS · Texas Global", domain: "global.utexas.edu" },
       { label: "Zero-Credit Internship Course (EXP 000/080)", url: "https://careersuccess.utexas.edu/students/get-experience/zero-credit-internship-course/", source: "UT Career Success", domain: "careersuccess.utexas.edu" },
@@ -316,7 +315,6 @@ const TOPICS = [
     keywords: "insurance health plan bcbs waiver card benefits summer graduate ahs ahp",
     title: "Health & medical requirements",
     desc: "This section combines UT student health insurance resources with medical clearance and immunization requirements for international students. ",
-    notice: "Insurance and medical clearance are separate processes. For treatment or diagnosis related questions, please contact student health services.",
     links: [
       { label: "Student health plan (overview & waivers)", url: "https://global.utexas.edu/isss/advising-services/insurance/student-plan", source: "ISSS · Texas Global", domain: "global.utexas.edu" },
       { label: "Member portal (find providers, view ID card)", url: "https://www.bcbstx.com/", source: "BCBS · Blue Cross Blue Shield Texas", domain: "bcbstx.com" },
@@ -339,7 +337,6 @@ const TOPICS = [
     keywords: "travel signature i20 i-515a i-94 dhs cbp border re-entry before travel arrival record",
     title: "Travel & signatures",
     desc: "Students must have a valid travel signature on their I-20 before leaving the US. The Form I-515A is a DHS form for students who arrived at a port of entry without a proper visa or entry document. The I-94 is the official CBP arrival record.",
-    notice: "Request travel signatures before booking international travel; processing takes time.",
     links: [
       { label: "Before-travel signature info", url: "https://global.utexas.edu/isss/immigration/before-travel", source: "ISSS · Texas Global", domain: "global.utexas.edu" },
       { label: "I-94 (official arrival record)", url: "https://i94.cbp.dhs.gov/home", source: "CBP · DHS", domain: "i94.cbp.dhs.gov" },
@@ -360,7 +357,6 @@ const TOPICS = [
     keywords: "taxes sprintax tax code irs withholding non-resident treaty email ssn social security itin",
     title: "Taxes",
     desc: "Sprintax is the recommended tax prep software for international students. UT does not have a campus login, students must create their own account. The UT discount code is found on the ISSS taxes page.",
-    notice: "ISSS does not provide tax advice. Treaty, withholding, and filing questions belong with the IRS, Sprintax, or a qualified tax professional.",
     links: [
       {
         label: "Get the Sprintax access code",
@@ -488,7 +484,6 @@ const TOPICS = [
     keywords: "myio request services portal students scholars departments immigration benefits case status documents",
     title: "myIO",
     desc: "myIO is the main ISSS portal for students, scholars, and departments to submit requests, manage immigration records, and track case progress.",
-    notice: "For myIO tasks, start at the portal entrance, then open the student request or guide that matches what you need.",
     links: [
       {
         label: "myIO (portal entrance)",
@@ -640,7 +635,6 @@ const TOPICS = [
     keywords: "immigration forms i-515a i-983 sevis dhs uscis status updates policy urgent",
     title: "Immigration forms & updates",
     desc: "Key government forms and official immigration resources. ISSS posts immigration policy updates; urgent or case-specific questions belong with an advisor or those update pages.",
-    notice: "Immigration questions that depend on your situation should go to an ISSS advisor. This page links to official sources rather than summarizing or interpreting policy.",
     links: [
       { label: "Immigration policy updates", url: "https://global.utexas.edu/isss/immigration/immigration-updates", source: "ISSS · Texas Global", domain: "global.utexas.edu" },
       { label: "Form I-515A overview", url: "https://studyinthestates.dhs.gov/students/travel/form-i-515a-overview", source: "DHS · Study in the States", domain: "studyinthestates.dhs.gov" },
@@ -1454,16 +1448,6 @@ function BottomSheet({ topic, onClose }) {
 
               {/* body */}
               <div style={{ padding: "20px 24px 0" }}>
-                {topic.notice && (
-                  <div style={{ display: "flex", alignItems: "flex-start", gap: 10,
-                    background: "var(--color-burnt-light)", borderLeft: "4px solid var(--color-burnt)",
-                    borderRadius: "0 6px 6px 0", padding: "12px 14px", marginBottom: 20,
-                    fontSize: 13, color: "#7A3700", lineHeight: 1.6 }}>
-                    <Icon name="alert-circle" size={15} style={{ flexShrink: 0, marginTop: 1 }} />
-                    <span>{topic.notice}</span>
-                  </div>
-                )}
-
                 <p style={SECTION_LABEL}>Official resources</p>
                 {topic.links.map((l, idx) => {
                   const linkKey = l.url + l.label;
