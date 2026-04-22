@@ -153,8 +153,8 @@ const TOPICS = [
     iconColor: "orange",
     keywords: "cpt opt stem work authorization employment f1 i-983 practical training 10 business days last name ssn social security",
     title: "Work authorization",
-    desc: "F-1 students can work off-campus through CPT or OPT. Processing takes 10 business days; plan ahead and allow time for departmental approval (Step 4). Applications are sorted by last name for processing.",
-    notice: "Application status is not confirmed by walk-in or phone. You receive a confirmation email when your application is received and again when it is reviewed. Whether a specific job is allowed under OPT is covered in official DHS resources (for example Study in the States).",
+    desc: "F-1 students can work off-campus through CPT or OPT. Processing takes 10 business days. Applications are sorted by last name for processing.",
+    notice: "Application status is not confirmed by walk-in or phone. You receive a confirmation email when your application is received and again when it is reviewed. ",
     links: [
       { label: "CPT: Curricular Practical Training", url: "https://global.utexas.edu/isss/immigration/f-1/employment/cpt", source: "ISSS · Texas Global", domain: "global.utexas.edu" },
       { label: "Zero-Credit Internship Course (EXP 000/080)", url: "https://careersuccess.utexas.edu/students/get-experience/zero-credit-internship-course/", source: "UT Career Success", domain: "careersuccess.utexas.edu" },
@@ -191,9 +191,9 @@ const TOPICS = [
       { label: "Apply for SSN", url: "https://global.utexas.edu/isss/life-at-ut/ssn", source: "ISSS · Texas Global", domain: "global.utexas.edu" },
     ],
     pageContents: [
-      ["CPT page", "Eligibility rules", "Full-time vs part-time limits", "OPT impact", "Step-by-step myIO workflow"],
+      ["CPT eligibility rules", "Full-time vs part-time limits", "OPT impact", "Step-by-step myIO workflow"],
       ["Zero-credit internship page", "EXP 000/080 enrollment details", "When that course supports internship requirements"],
-      ["Post-completion OPT page", "Workshop modules", "Filing timeline", "Required documents", "Reporting and travel guidance"],
+      ["Post-completion OPT page", "Filing timeline", "Required documents", "Reporting and travel guidance"],
       ["STEM OPT page", "I-983 requirements", "E-Verify employer conditions", "6/12/18/24-month reporting checkpoints"],
       ["DHS SEVIS OPT page", "Federal definitions", "Policy references", "Official FAQ-style guidance on OPT"],
       ["SSN page", "Who is eligible", "Required letter and document checklist", "How to request SSN support from ISSS"],
@@ -207,7 +207,7 @@ const TOPICS = [
     iconColor: "green",
     keywords: "appointment advisor book schedule peer mentor advising april",
     title: "Book an appointment",
-    desc: "For questions that need a one-on-one answer, book directly online. April appointments fill quickly; booking early is recommended.",
+    desc: "For questions that need a one-on-one answer, book directly online. Booking early is recommended.",
     links: [
       {
         label: "International student advisor (In-person)",
@@ -315,8 +315,8 @@ const TOPICS = [
     iconColor: "blue",
     keywords: "insurance health plan bcbs waiver card benefits summer graduate ahs ahp",
     title: "Health & medical requirements",
-    desc: "This section combines UT student health insurance resources with medical clearance and immunization requirements for international students. Use these links for plan access, waivers, and pre-registration health compliance steps.",
-    notice: "Insurance and medical clearance are separate processes. For treatment or diagnosis decisions, use licensed medical providers.",
+    desc: "This section combines UT student health insurance resources with medical clearance and immunization requirements for international students. ",
+    notice: "Insurance and medical clearance are separate processes. For treatment or diagnosis related questions, please contact student health services.",
     links: [
       { label: "Student health plan (overview & waivers)", url: "https://global.utexas.edu/isss/advising-services/insurance/student-plan", source: "ISSS · Texas Global", domain: "global.utexas.edu" },
       { label: "Member portal (find providers, view ID card)", url: "https://www.bcbstx.com/", source: "BCBS · Blue Cross Blue Shield Texas", domain: "bcbstx.com" },
@@ -325,9 +325,9 @@ const TOPICS = [
     ],
     pageContents: [
       ["ISSS insurance pages", "UT SHIP basics", "Automatic enrollment rules", "Waiver categories", "Deadline guidance"],
-      ["BCBSTX member portal", "Provider search", "Digital ID card access", "Claims", "Benefits", "Account tools"],
+      ["BCBSTX member portal", "Provider search", "Digital ID card access", "Claims", "Benefits"],
       ["AHP portal", "Term enrollment and waiver submission", "Policy documents", "Billing dates", "Waiver support resources"],
-      ["UHS international student requirements page", "Required immunizations", "TB screening and testing steps", "Med+Proctor submission process", "Medical hold removal timeline"],
+      ["Required immunizations", "TB screening and testing steps", "Med+Proctor submission process", "Medical hold removal timeline"],
     ],
     tags: [{ text: "Card" }, { text: "Waiver" }, { text: "BCBS", color: "blue" }, { text: "AHP", color: "blue" }, { text: "Summer waiver" }, { text: "Graduate" }],
   },
@@ -526,7 +526,6 @@ const TOPICS = [
     keywords: "full time full-time enrollment reduced course load rcl final semester withdraw withdrawal leave of absence sevis credit hours online hybrid in person f1 f-1 j1 j-1 myio 12th class day vacation summer in absentia",
     title: "Full-time enrollment & visa status",
     desc: "ISSS publishes credit-hour minimums, modality rules, and deadlines for maintaining F-1/J-1 status each term. Use the official page for tables and examples; use myIO when a Reduced Course Load or similar request is required.",
-    notice: "Short bullets under the first link’s quick view; full detail on ISSS.",
     links: [
       {
         label: "Full-time enrollment requirements (F-1 & J-1)",
@@ -1237,10 +1236,27 @@ function buildFallbackQuickView(link, pageSummary, topicKey) {
       ];
     }
   } else if (topicKey === "financial" || label.includes("scholarship") || label.includes("funding")) {
-    helpfulItems = [
-      "Which Texas Global funding programs match my level, major, or study-abroad plan?",
-      "What are the application windows, required documents, and award timelines for each scholarship?",
-    ];
+    if (link.url === "https://global.utexas.edu/abroad/funding/scholarships") {
+      helpfulItems = [
+        "Which Education Abroad scholarships fit my program, term, and eligibility profile?",
+        "What deadlines and application materials are required in LASSO for this cycle?",
+      ];
+    } else if (link.url === "https://global.utexas.edu/isss/advising-services/scholarships") {
+      helpfulItems = [
+        "Which ISSS scholarships are open to my student type and degree level?",
+        "What are the required documents, timeline, and selection criteria for each award?",
+      ];
+    } else if (link.url === "https://utdirect.utexas.edu/apps/student/residency/") {
+      helpfulItems = [
+        "How do I submit or update my Texas residency questionnaire in UT Direct?",
+        "What supporting information is needed if my residency status is pending or incorrect?",
+      ];
+    } else {
+      helpfulItems = [
+        "Which Texas Global funding programs match my level, major, or study-abroad plan?",
+        "What are the application windows, required documents, and award timelines for each scholarship?",
+      ];
+    }
   } else if (topicKey === "myio" || topicKey === "checkin" || label.includes("myio") || label.includes("check-in")) {
     helpfulItems = [
       "Which myIO e-form should I submit for check-in, reduced course load, or document requests?",
@@ -1264,10 +1280,22 @@ function buildFallbackQuickView(link, pageSummary, topicKey) {
       ];
     }
   } else if (topicKey === "academic" || label.includes("hold") || label.includes("registration")) {
-    helpfulItems = [
-      "Is this hold caused by immigration check-in, medical clearance, advising, or another office?",
-      "What exact step removes the hold and how long does release processing usually take?",
-    ];
+    if (link.url === "https://onestop.utexas.edu/registration-and-degree-planning/registering-for-classes/resolving-holds/") {
+      helpfulItems = [
+        "Which specific hold type is blocking registration, and which office clears it?",
+        "What RIS step do I complete now, and how long does hold release usually take?",
+      ];
+    } else if (link.url === "https://global.utexas.edu/abroad/apply/credit") {
+      helpfulItems = [
+        "How will my study abroad coursework transfer back for UT credit?",
+        "What approvals or forms are required before I leave to avoid credit delays?",
+      ];
+    } else {
+      helpfulItems = [
+        "Is this hold caused by immigration check-in, medical clearance, advising, or another office?",
+        "What exact step removes the hold and how long does release processing usually take?",
+      ];
+    }
   } else if (topicKey === "contact" || label.includes("contact") || label.includes("hotline")) {
     helpfulItems = [
       "Which email should students vs scholars use for general questions?",
